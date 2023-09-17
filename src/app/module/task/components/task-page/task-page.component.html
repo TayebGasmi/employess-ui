@@ -1,0 +1,50 @@
+<div class="card grid grid-nogutter">
+  <div class="col-12 md:col-6 drag-column" style="width: 20%">
+    <ng-container *ngIf="allTask$ | async as tasksList">
+      <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+          <div >
+            <app-add-task></app-add-task>
+          </div>
+        </ng-template>
+
+
+      </p-toolbar>
+
+      <div *ngFor="let task of tasksList" class="overflow-auto" pDraggable="tasks" (onDragStart)="dragStart(task)" (onDragEnd)="dragEnd()">
+        <app-task-card
+        [task]="task"  >
+
+        </app-task-card>
+      </div>
+    </ng-container>
+
+  </div>
+
+
+  <div class="col-13 md:col-9 drop-column" pDroppable="tasks" style="widht: 100%" (onDrop)="drop('cc')"  >
+    <p-toolbar styleClass="mb-4">
+      <ng-template pTemplate="left">
+        <div class="flex flex-row flex-wrap card-container blue-container">
+          <app-add-sprint></app-add-sprint>
+
+
+        </div>
+      </ng-template>
+
+
+    </p-toolbar>
+
+    <div class="grid">
+
+      <div class="col">
+1
+      </div>
+      <div class="col">1</div>
+      <div class="col">1</div>
+      <div class="col">1</div>
+      <div class="col">1</div>
+
+    </div>
+  </div>
+</div>
