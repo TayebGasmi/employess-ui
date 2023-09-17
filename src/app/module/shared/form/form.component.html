@@ -54,7 +54,7 @@
                          display="chip"
           ></p-multiSelect>
           <p-dropdown *ngSwitchCase="'dropdown'" [options]="field.options" [filter]="true" [showClear]="true"
-                      [placeholder]="field.placeholder || ''" >
+                      [placeholder]="field.placeholder || ''"  [formControlName]="field.name">
           </p-dropdown>
           <ng-container *ngSwitchCase="'radio'">
             <div *ngFor="let option of field.options;let index=index; ">

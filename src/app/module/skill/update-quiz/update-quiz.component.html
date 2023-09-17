@@ -1,8 +1,7 @@
-<button pButton type="button" icon="pi pi-plus" class="p-button-success mr-2" (click)="openModal()" >
-  New
-</button>
-<p-dialog  [(visible)]="showModal" [style]="{ width: '50vw' }" [header]="'add new quiz'" [modal]="true" class="p-fluid">
-  <app-form [fields]="QuizForm">
+<button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-warning mr-2" (click)="openModal()" ></button>
+
+<p-dialog  [(visible)]="showModal" [style]="{ width: '50vw' }" [header]="'update quiz'" [modal]="true" class="p-fluid">
+  <app-form [fields]="QuizForm" [formData]="quiz">
   </app-form>
   <ng-template pTemplate="footer">
     <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="closeModal()"></button>

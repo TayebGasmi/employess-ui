@@ -1,0 +1,43 @@
+<!--<div class="p-mb-2">-->
+<!--  <ng-container *ngIf="Quiz$ | async as quiz">-->
+<!--    <div class="p-d-flex p-jc-between p-ai-center p-b-3 p-mb-3 p-b">-->
+<!--      <div class="p-d-flex p-ai-center">-->
+<!--        <img [src]="'../assets/course-react.jpg'" alt="{{ quiz.name }}" class="p-rounded p-shadow-2" style="width: 6.5rem">-->
+<!--        <div class="p-ml-3">-->
+<!--          <h3 class="p-mb-0"><span class="p-text-inherit">{{ quiz.name }}</span></h3>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <span class="p-text-danger"><i class="pi pi-clock"></i> 00:05:55</span>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="p-b-3 p-b">-->
+<!--      Description: {{ quiz.description }}-->
+<!--    </div>-->
+<!--    <app-quiz-question></app-quiz-question>-->
+<!--  </ng-container>-->
+<!--</div>-->
+<ng-container *ngIf="Quiz$ | async as quiz">
+
+  <div class="grid">
+    <div class="col-12">
+      <div class="card px-6 py-3">
+
+          <div class="flex justify-content-between mb-1">
+            <a [routerLink]="['/skill']" pButton pRipple type="button" icon="pi pi-chevron-left" class="p-button-link "  ></a>
+            <h3 class="flex justify-content-center  font-bold font-italic text-center">{{quiz.name}}</h3>
+            <a  pButton pRipple type="button" icon="pi pi-clock" class="p-button-link " label="00:10:00" ></a>
+          </div>
+
+          <p-divider align="center" class="mt-0 p-0">
+            <b>Description</b>
+          </p-divider>
+        <div class="p-mb-2">
+          {{quiz.description}}
+        </div>
+        <app-quiz-question></app-quiz-question>
+      </div>
+    </div>
+    </div>
+</ng-container>
+

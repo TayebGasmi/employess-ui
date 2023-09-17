@@ -18,7 +18,19 @@ import {DeleteQuizComponent} from './delete-quiz/delete-quiz.component';
 import {InputTextModule} from "primeng/inputtext";
 import {ReactiveFormsModule} from "@angular/forms";
 import { AddQuizComponent } from './add-quiz/add-quiz.component';
-import { UpdataQuizComponent } from './updata-quiz/updata-quiz.component';
+import { UpdateQuizComponent } from './update-quiz/update-quiz.component';
+import { QuizDetailsComponent } from './quiz-details/quiz-details.component';
+import { QuizQuestionComponent } from './quiz-question/quiz-question.component';
+import { QuizResponseComponent } from './quiz-response/quiz-response.component';
+import {CardModule} from "primeng/card";
+import {DividerModule} from "primeng/divider";
+import { AddQuestionComponent } from './add-question/add-question.component';
+import {CheckboxModule} from "primeng/checkbox";
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {MenuModule} from "primeng/menu";
+import {ToggleButtonModule} from "primeng/togglebutton";
+import {FileUploadModule} from "primeng/fileupload";
+import { QuestionComponent } from './question/question.component';
 
 
 @NgModule({
@@ -30,7 +42,12 @@ import { UpdataQuizComponent } from './updata-quiz/updata-quiz.component';
     QuizListComponent,
     DeleteQuizComponent,
     AddQuizComponent,
-    UpdataQuizComponent
+    UpdateQuizComponent,
+    QuizDetailsComponent,
+    QuizQuestionComponent,
+    QuizResponseComponent,
+    AddQuestionComponent,
+    QuestionComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +59,7 @@ import { UpdataQuizComponent } from './updata-quiz/updata-quiz.component';
     RippleModule,
     DialogModule,
     ConfirmDialogModule,
-    InputTextModule, ReactiveFormsModule
+    InputTextModule, ReactiveFormsModule, CardModule, DividerModule, CheckboxModule, InputTextareaModule, MenuModule, ToggleButtonModule, FileUploadModule
   ]
 })
 export class SkillModule {

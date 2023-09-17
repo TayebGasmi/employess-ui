@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UpdataQuizComponent } from './updata-quiz.component';
+import { UpdateQuizComponent } from './update-quiz.component';
 
 describe('UpdataQuizComponent', () => {
-  let component: UpdataQuizComponent;
-  let fixture: ComponentFixture<UpdataQuizComponent>;
+  let component: UpdateQuizComponent;
+  let fixture: ComponentFixture<UpdateQuizComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [UpdataQuizComponent]
+      declarations: [UpdateQuizComponent]
     });
-    fixture = TestBed.createComponent(UpdataQuizComponent);
+    fixture = TestBed.createComponent(UpdateQuizComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
