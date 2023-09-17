@@ -1,0 +1,51 @@
+<ng-container *ngIf="dataSource">
+  <p-table [columns]="cols" [value]="dataSource" #dt [(selection)]="selectedRow"   responsiveLayout="scroll" [tableStyle]="{'min-width': '50rem'}" selectionMode="multiple">
+    <ng-template pTemplate="caption">
+      <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+        <h5 class="m-0">{{title}}</h5>
+        <ng-container *ngTemplateOutlet="search || null"></ng-container>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 3rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th *ngFor="let head of headers" [pSortableColumn]="head.dataKey"> <p-sortIcon [field]="head.dataKey"></p-sortIcon>{{ (head.displayName || head.dataKey) | titlecase }}</th>
+        <th *ngIf="actions"></th>
+      </tr>
+
+    </ng-template>
+    <ng-template pTemplate="body" let-element>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="element"></p-tableCheckbox>
+        </td>
+        <td *ngFor="let header of headers ">
+          <ng-container *ngIf="header.template; else defaultCell">
+            <ng-container
+              *ngTemplateOutlet="header.template; context: { $implicit: element }"
+            ></ng-container>
+          </ng-container>
+          <ng-template #defaultCell>{{  element[header.dataKey] }}</ng-template>
+        </td>
+        <td *ngIf="actions">
+          <ng-container *ngTemplateOutlet="actions; context: { $implicit: element }"></ng-container>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="8">No data found.</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="loadingbody">
+      <tr>
+        <td colspan="8">Loading  data. Please wait.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-container>
+
+
+

@@ -1,0 +1,80 @@
+<form *ngIf="fields.length > 0" [formGroup]="form">
+  <ng-container *ngFor="let field of fields">
+    <div class="field">
+      <label *ngIf="field.type !== 'checkbox'" [for]="field.name" class="form-label">{{ field.label }}</label>
+
+      <div class="input-container">
+        <ng-container [ngSwitch]="field.type">
+          <input pInputText *ngSwitchDefault
+                 [formControlName]="field.name"
+                 [id]="field.name"
+                 [ngClass]="{'ng-invalid ng-dirty mr-2': showFieldErrors(field.name)}"
+                 [placeholder]="field.placeholder || ''"
+                 [type]="field.type"
+          />
+          <p-inputNumber *ngSwitchCase="'number'"
+                         [formControlName]="field.name"
+                         [id]="field.name"
+                         [ngClass]="{'ng-invalid ng-dirty mr-2': showFieldErrors(field.name)}"
+                         [placeholder]="field.placeholder || ''"
+                         [min]="0"
+                         [max]="100"
+                         [step]="1"
+          ></p-inputNumber>
+          <p-password *ngSwitchCase="'password'" [toggleMask]="true"
+                      [formControlName]="field.name"
+                      [id]="field.name"
+                      [ngClass]="{'ng-invalid ng-dirty mr-2': showFieldErrors(field.name)}"
+                      [placeholder]="field.placeholder || ''"
+          ></p-password>
+          <p-calendar *ngSwitchCase="'date'"
+                      [formControlName]="field.name"
+                      [id]="field.name"
+                      [ngClass]="{'ng-invalid ng-dirty mr-2': showFieldErrors(field.name)}"
+                      [placeholder]="field.placeholder || ''"
+          ></p-calendar>
+          <textarea *ngSwitchCase="'textarea'" pInputTextarea
+                    [formControlName]="field.name"
+                    [id]="field.name"
+                    [ngClass]="{'ng-invalid ng-dirty mr-2': showFieldErrors(field.name)}"
+                    [placeholder]="field.placeholder || ''"
+          ></textarea>
+          <p-checkbox *ngSwitchCase="'checkbox'" [formControlName]="field.name"
+                      [id]="field.name"
+                      [ngClass]="{'ng-invalid ng-dirty mr-2': showFieldErrors(field.name)}"
+                      [binary]="true"
+                      [label]="field.label"
+          ></p-checkbox>
+          <p-multiSelect *ngSwitchCase="'select'"
+                         [formControlName]="field.name"
+                         [id]="field.name"
+                         [ngClass]="{'ng-invalid ng-dirty mr-2': showFieldErrors(field.name)}"
+                         [options]="field.options"
+                         [optionLabel]="field.placeholder || ''"
+                         display="chip"
+          ></p-multiSelect>
+          <p-dropdown *ngSwitchCase="'dropdown'" [options]="field.options" [filter]="true" [showClear]="true"
+                      [placeholder]="field.placeholder || ''" >
+          </p-dropdown>
+          <ng-container *ngSwitchCase="'radio'">
+            <div *ngFor="let option of field.options;let index=index; ">
+              <div class="mt-1">
+                <p-radioButton [formControlName]="field.name"
+                               [id]="field.name+index"
+                               [name]="field.name"
+                               [ngClass]="{'ng-invalid ng-dirty ': showFieldErrors(field.name)}"
+                               [value]="option.value"
+                               class="mt-"
+                ></p-radioButton>
+                <label [for]="field.name+index" class="form-check-label"> {{option.label}}</label>
+              </div>
+
+            </div>
+          </ng-container>
+        </ng-container>
+        <div class="text-base text-red-500 mt-2" *ngIf="showFieldErrors(field.name)">Invalid {{ field.label }}</div>
+      </div>
+    </div>
+  </ng-container>
+
+</form>

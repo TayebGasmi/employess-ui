@@ -1,0 +1,44 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card px-6 py-6">
+      <p-toolbar styleClass="mb-4"    >
+        <ng-template pTemplate="left">
+          <div class="my-2">
+            <app-add-skill></app-add-skill>
+            <ng-container  *ngTemplateOutlet="deleteALL"></ng-container>
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+          <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="exportExcel()" ></button>
+
+        </ng-template>
+      </p-toolbar>
+
+      <ng-container *ngIf="skills$ | async as skills">
+      <app-table  #table [dataSource]="skills.content" [title]="'Manage Skills'" [headers]="skillHeaders" [cols]="cols">
+        <ng-template #search>
+          <span class="p-input-icon-left">
+    <i class="pi pi-search"></i>
+    <input type="text" pInputText placeholder="Search..."  class="w-full sm:w-auto" [formControl]="name" />
+</span>
+        </ng-template>
+        <ng-template #actions let-rowData >
+          <app-update-skill [skill]="rowData"></app-update-skill>
+          <app-delete-skill [id]="rowData.id"></app-delete-skill>
+          <a [routerLink]="['/skill/quiz', rowData.id]" pButton pRipple type="button" icon="pi pi-eye" class="p-button-info mx-2"  ></a>
+        </ng-template>
+      </app-table>
+      </ng-container>
+      <ng-container *ngIf="totalItems$|async as totalItems " >
+        <div>Showing {{first}} to entries of {{totalItems}}</div>
+        <p-paginator *ngIf="pagination$ | async as pagination"  (onPageChange)="onPageChange($event)" [first]="first" [rows]="pagination.rows" [totalRecords]="totalItems" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+      </ng-container>
+    </div>
+    </div>
+  </div>
+<ng-template #deleteALL>
+  <p-confirmDialog [style]="{width: '50vw'} ">
+  </p-confirmDialog>
+  <button pButton pRipple label="Delete"  icon="pi pi-trash" class="p-button-danger" (click)="confirm()"></button>
+</ng-template>
