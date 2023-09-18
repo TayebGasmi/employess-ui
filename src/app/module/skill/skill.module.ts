@@ -31,6 +31,15 @@ import {MenuModule} from "primeng/menu";
 import {ToggleButtonModule} from "primeng/togglebutton";
 import {FileUploadModule} from "primeng/fileupload";
 import { QuestionComponent } from './question/question.component';
+import { DomainListComponent } from './domain-list/domain-list.component';
+import { ActivityListComponent } from './activity-list/activity-list.component';
+import { AddActivityComponent } from './add-activity/add-activity.component';
+import { UpdateActivityComponent } from './update-activity/update-activity.component';
+import { UpdateDomainComponent } from './update-domain/update-domain.component';
+import { AddDomainComponent } from './add-domain/add-domain.component';
+import { AddFormComponent } from './add-form/add-form.component';
+import { DeleteActivityComponent } from './delete-activity/delete-activity.component';
+import { DeleteDomainComponent } from './delete-domain/delete-domain.component';
 
 
 @NgModule({
@@ -47,7 +56,16 @@ import { QuestionComponent } from './question/question.component';
     QuizQuestionComponent,
     QuizResponseComponent,
     AddQuestionComponent,
-    QuestionComponent
+    QuestionComponent,
+    DomainListComponent,
+    ActivityListComponent,
+    AddActivityComponent,
+    UpdateActivityComponent,
+    UpdateDomainComponent,
+    AddDomainComponent,
+    AddFormComponent,
+    DeleteActivityComponent,
+    DeleteDomainComponent
   ],
   imports: [
     CommonModule,

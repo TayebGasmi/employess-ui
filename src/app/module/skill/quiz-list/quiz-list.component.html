@@ -10,7 +10,13 @@
         </ng-template>
 
         <ng-template pTemplate="right">
-          <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="exportExcel()" ></button>
+          <div class="my-2">
+
+            <a [routerLink]="['/skill']" pButton pRipple type="button" label="skill" icon="pi pi-arrow-left" class="p-button-info mx-1 "  ></a>
+            <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="exportExcel()" ></button>
+          </div>
+
+
         </ng-template>
       </p-toolbar>
 

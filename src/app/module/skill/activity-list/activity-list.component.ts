@@ -1,42 +1,36 @@
 import {Component, ViewChild} from '@angular/core';
 import {NotificationService} from "../../shared/notification.service";
 import {ConfirmationService, ConfirmEventType} from "primeng/api";
-import {TableColumnHeader} from "../../../core/models/tableColumnHeader";
 import {
   BehaviorSubject,
   combineLatest,
   debounceTime,
   distinctUntilChanged,
-  map,
   Observable,
   startWith,
   switchMap,
   tap
 } from "rxjs";
+import {TableColumnHeader} from "../../../core/models/tableColumnHeader";
 import {FormControl} from "@angular/forms";
 import {Page} from "../../../core/models/Page";
-import {Skill} from "../../../core/models/Skill";
-import {QuizService} from "../../../core/service/quiz.service";
-import {ActivatedRoute} from "@angular/router";
+import {Activity} from "../../../core/models/Activity";
+import {ActivityService} from "../../../core/service/activity.service";
 
 interface Pagination {
   rows: number;
   page: number;
 }
 @Component({
-  selector: 'app-quiz-list',
-  templateUrl: './quiz-list.component.html',
-  styleUrls: ['./quiz-list.component.scss']
+  selector: 'app-activity-list',
+  templateUrl: './activity-list.component.html',
+  styleUrls: ['./activity-list.component.scss']
 })
-
-export class QuizListComponent {
-  constructor(private notificationService: NotificationService,private quizService: QuizService,private confirmationService: ConfirmationService,private route: ActivatedRoute) {
+export class ActivityListComponent {
+  constructor(private notificationService: NotificationService,private service: ActivityService,private confirmationService: ConfirmationService) {
 
   }
-  updateQuizzes$ = this.quizService.updateQuizzes$;
-  skillId$:Observable<number> = this.route.params.pipe(
-    map(params => params["id"])
-  )
+  updateData$ = this.service.data$;
   skillHeaders: TableColumnHeader[] = [
     {
       dataKey: 'name',
@@ -48,25 +42,23 @@ export class QuizListComponent {
   pagination$:BehaviorSubject<Pagination>=new BehaviorSubject<Pagination>({rows:10,page:0});
   name = new FormControl('');
   search$ = this.name.valueChanges.pipe(
-    debounceTime(300),
-    distinctUntilChanged(),
-    startWith(''),
+      debounceTime(300),
+      distinctUntilChanged(),
+      startWith(''),
   );
   totalItems$: BehaviorSubject<number> = new BehaviorSubject(100);
-  quizzes$: Observable<Page<Skill>> = combineLatest([
+  data$: Observable<Page<Activity>> = combineLatest([
     this.pagination$,
     this.search$,
-    this.updateQuizzes$,
-    this.skillId$
+    this.updateData$,
   ]).pipe(
-    switchMap(([pagination, name,_,id]) => {
-      if (name) {
-        return this.quizService.getQuizBySkillIdAndName(id,name, pagination.page ?? 0, pagination.rows ?? 10);
-      }
-      return this.quizService.getQuizzesBySkill(id,pagination.page ?? 0, pagination.rows ?? 10);
+      switchMap(([pagination,name,_]) => {
+       if (name)
+            return this.service.findByName(name,pagination.page ?? 0, pagination.rows ?? 10);
+        return this.service.findAll(pagination.page ?? 0, pagination.rows ?? 10);
 
-    }),
-    tap((page) => this.totalItems$.next(page.totalElements))
+      }),
+      tap((page) => this.totalItems$.next(page.totalElements))
   );
 
   first: number = 0;
@@ -87,15 +79,15 @@ export class QuizListComponent {
   ];
 
   deleteAll() {
-    this.quizService.deleteAllQuizzes(this.table.selectedRow).subscribe(value => {
+    this.service.deleteAll(this.table.selectedRow).subscribe(value => {
       this.notificationService.showInfo("Deleted successfully","Delete")
-      this.quizService.updateQuizzes()
+      this.service.updateData()
     });}
 
   delete(rowData: any):void|undefined {
-    this.quizService.deleteQuizById(rowData.id).subscribe(value => {
+    this.service.deleteById(rowData.id).subscribe(value => {
       this.notificationService.showInfo("Deleted successfully","Delete")
-      this.quizService.updateQuizzes()
+      this.service.updateData()
     });
   }
 
@@ -121,6 +113,4 @@ export class QuizListComponent {
       }
     });
   }
-
-
 }

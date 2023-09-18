@@ -43,11 +43,18 @@ export class AppMenuComponent implements OnInit {
              }
              ,
               {
-                label: 'skills',
+                label: 'performance',
                   items: [
-                      { label: 'Skills', icon: 'pi pi-fw pi-star', routerLink: ['/skills'] },
+                      { label: 'Skills', icon: 'pi pi-fw pi-star', routerLink: ['/skill'] },
                       { label: 'Dashboard', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/dashboard/skills'] },
+                      {
+                          label:'Activity', icon: 'pi pi-fw pi-calendar', routerLink: ['skill/activity']
+                      },
+                      {
+                          label:'Domain', icon: 'pi pi-fw pi-calendar', routerLink: ['skill/domain']
+                      }
                   ]
+
               }
 
 
