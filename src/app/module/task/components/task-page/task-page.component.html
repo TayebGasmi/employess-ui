@@ -27,8 +27,13 @@
       <ng-template pTemplate="left">
         <div class="flex flex-row flex-wrap card-container blue-container">
           <app-add-sprint></app-add-sprint>
-
-
+          <ng-container *ngIf="allSprints$ | async as allSprints" >
+            <form>
+            <div >
+              <p-dropdown [options]="allSprints" [(ngModel)]="selectedSprint" optionLabel="sprintTitle" placeholder="Select a Sprint"></p-dropdown>
+            </div>
+            </form>
+          </ng-container>
         </div>
       </ng-template>
 

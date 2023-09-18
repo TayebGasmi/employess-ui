@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {Sprint} from "../../../../core/models/Sprint";
 import {SprintServiceService} from "../../../../core/service/sprint-service.service";
 
+
 @Component({
   selector: 'app-task-page',
   templateUrl: './task-page.component.html',
@@ -15,14 +16,10 @@ export class TaskPageComponent implements OnInit{
      draggedTask : Task | null | undefined;
      allSprints$:Observable<Sprint[]> = this.sprintService.getAllUndeletedSprints()
        sprintOptions!:any;
-     selectedSprint!:any;
+     selectedSprint:Sprint = new Sprint();
+     mySprints:any[] = [];
   constructor(private taskService :TaskService,private sprintService:SprintServiceService) {
-    this.sprintService.getAllUndeletedSprints().subscribe(sprints=>{
-      sprints.forEach(sprint=>{
-        let sprintOption= {name:sprint.sprintTitle,value:sprint.id};
-        this.sprintOptions.push(sprintOption);
-      })
-    })
+
   }
 
   ngOnInit() {
@@ -43,5 +40,4 @@ export class TaskPageComponent implements OnInit{
     }
   }
 
-  protected readonly Sprint = Sprint;
 }
