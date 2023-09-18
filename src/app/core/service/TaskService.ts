@@ -18,21 +18,20 @@ export class TaskService {
         return this.httpClient.get<Task[]>(this.API_URL + "/undeleted")
     }
 
-    deleteTask(id: string) {
+    deleteTask(id: string):Observable<Task> {
 
-        this.httpClient.put<Task>(this.API_URL + "/delete/" + id, "").subscribe();
+        return  this.httpClient.put<Task>(this.API_URL + "/delete/" + id, "");
     }
 
-    duplicateTask(id: string) {
-        console.log(this.API_URL + "/duplicate/" + id);
-        this.httpClient.post<Task>(this.API_URL + "/duplicate/" + id, "").subscribe();
+    duplicateTask(id: string):Observable<Task> {
+   return  this.httpClient.post<Task>(this.API_URL + "/duplicate/" + id, "");
     }
 
     saveTask(task: Task) {
         return this.httpClient.post<Task>(`${this.API_URL}`, task);
     }
 
-    updateTask(task: Task, taskId: string) {
+    updateTask(task: Task, taskId : any) {
         return this.httpClient.put<Task>(`${this.API_URL}/${taskId}`, task);
     }
 

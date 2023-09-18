@@ -17,8 +17,8 @@ export class SprintServiceService {
         return this.httpClient.get<Sprint[]>(`${this.API_URL}/all-undeleted`);
     }
 
-    saveSprint(sprint: Sprint) {
-        return this.httpClient.post<Sprint>(`${this.API_URL}`, sprint).subscribe();
+    saveSprint(sprint: Sprint):Observable<Sprint> {
+        return this.httpClient.post<Sprint>(`${this.API_URL}`, sprint);
     }
 
     deleteSprint(sprintId: string) {
