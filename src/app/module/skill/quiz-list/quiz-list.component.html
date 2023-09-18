@@ -4,30 +4,53 @@
       <p-toolbar styleClass="mb-4"    >
         <ng-template pTemplate="left">
           <div class="my-2">
-            <app-add-skill></app-add-skill>
+            <app-add-quiz *ngIf="skillId$ | async as skillId" [skillId]="skillId"></app-add-quiz>
             <ng-container  *ngTemplateOutlet="deleteALL"></ng-container>
           </div>
         </ng-template>
 
         <ng-template pTemplate="right">
-          <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="exportExcel()" ></button>
+          <div class="my-2">
+
+            <a [routerLink]="['/skill']" pButton pRipple type="button" label="skill" icon="pi pi-arrow-left" class="p-button-info mx-1 "  ></a>
+            <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="exportExcel()" ></button>
+          </div>
+
+
         </ng-template>
       </p-toolbar>
 
-      <ng-container *ngIf="skills$ | async as skills">
-        <app-table  #table [dataSource]="skills.content" [title]="'Manage Skills'" [headers]="skillHeaders" [cols]="cols">
+      <ng-container *ngIf="quizzes$ | async as quizzes">
+        <app-table  #table [dataSource]="quizzes.content" [title]="'Manage Quizzes'" [headers]="skillHeaders" [cols]="cols">
+          <ng-template #search>
+          <span class="p-input-icon-left">
+    <i class="pi pi-search"></i>
+    <input type="text" pInputText placeholder="Search..." class="w-full sm:w-auto" [formControl]="name"/>
+</span>
+          </ng-template>
           <ng-template #actions let-rowData >
-            <app-update-skill [skill]="rowData"></app-update-skill>
-            <app-delete-skill [id]="rowData.id"></app-delete-skill>
-            <a [routerLink]="['/skill/quiz', rowData.id]" pButton pRipple type="button" icon="pi pi-eye" class="p-button-info mx-2"  ></a>
+            <app-update-quiz [quiz]="rowData"> </app-update-quiz>
+            <app-delete-quiz [id]="rowData.id"></app-delete-quiz>
+            <a [routerLink]="['/skill/quiz/detail', rowData.id]" pButton pRipple type="button" icon="pi pi-eye" class="p-button-info mx-2"  ></a>
           </ng-template>
         </app-table>
       </ng-container>
-      <ng-container *ngIf="totalItems$|async as totalItems " >
-        <div class="flex"></div>
-        <span> {{totalItems}} total</span>
-        <p-paginator *ngIf="pagination$ | async as pagination"  (onPageChange)="onPageChange($event)" [first]="first" [rows]="pagination.rows" [totalRecords]="totalItems" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+      <ng-container *ngIf="totalItems$ | async as totalItems">
+        <div class="grid">
+          <div class="col-2 flex align-items-center justify-content-center ">
+            <span>{{ totalItems }} items total</span>
+          </div>
+            <p-paginator class="col-10 "
+              *ngIf="pagination$ | async as pagination"
+              (onPageChange)="onPageChange($event)"
+              [first]="first"
+              [rows]="pagination.rows"
+              [totalRecords]="totalItems"
+              [rowsPerPageOptions]="[10, 20, 30]"
+            ></p-paginator>
+        </div>
       </ng-container>
+
     </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-warning mr-2" (click)="openModal()" ></button>
 
-<p-dialog  [(visible)]="showModal" [style]="{ width: '50vw' }" [header]="'add new skill'" [modal]="true" class="p-fluid">
+<p-dialog  [(visible)]="showModal" [style]="{ width: '50vw' }" [header]="'update skill'" [modal]="true" class="p-fluid">
   <app-form [fields]="SkillForm" [formData]="skill">
   </app-form>
   <ng-template pTemplate="footer">

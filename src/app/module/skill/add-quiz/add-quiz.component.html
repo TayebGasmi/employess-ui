@@ -1,1 +1,11 @@
-<p>add-quiz works!</p>
+<button pButton type="button" icon="pi pi-plus" class="p-button-success mr-2" (click)="openModal()" >
+  New
+</button>
+<p-dialog  [(visible)]="showModal" [style]="{ width: '50vw' }" [header]="'add new quiz'" [modal]="true" class="p-fluid">
+  <app-form [fields]="QuizForm">
+  </app-form>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="closeModal()"></button>
+    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+  </ng-template>
+</p-dialog>

@@ -32,12 +32,6 @@ constructor(private notificationService: NotificationService,private skillServic
 
 }
   updateSkills$ = this.skillService.updateSkills$;
-  paginationDefaults = {
-    currentSize: 5,
-    currentPage: 1,
-    sizeOptions: [1, 5, 10, 25],
-    maxSize: 10,
-  };
   skillHeaders: TableColumnHeader[] = [
     {
       dataKey: 'name',
