@@ -18,6 +18,9 @@ import {Page} from "../../../core/models/Page";
 import {Skill} from "../../../core/models/Skill";
 import {QuizService} from "../../../core/service/quiz.service";
 import {ActivatedRoute} from "@angular/router";
+import {Domain} from "../../../core/models/Domain";
+import {DomainForm} from "../../../core/models/DomainForm";
+import {DomainService} from "../../../core/service/domain.service";
 
 interface Pagination {
   rows: number;
@@ -30,7 +33,10 @@ interface Pagination {
 })
 
 export class QuizListComponent {
-  constructor(private notificationService: NotificationService,private quizService: QuizService,private confirmationService: ConfirmationService,private route: ActivatedRoute) {
+  domainType:Domain={
+    name:'k'
+  }
+  constructor(private notificationService: NotificationService,private quizService: QuizService,private confirmationService: ConfirmationService,private route: ActivatedRoute,public domainService:DomainService) {
 
   }
   updateQuizzes$ = this.quizService.updateQuizzes$;
@@ -123,4 +129,5 @@ export class QuizListComponent {
   }
 
 
+  protected readonly DomainForm = DomainForm;
 }

@@ -31,6 +31,7 @@
           <ng-template #actions let-rowData >
             <app-update-quiz [quiz]="rowData"> </app-update-quiz>
             <app-delete-quiz [id]="rowData.id"></app-delete-quiz>
+            <app-add-form  [fields]="DomainForm" [service]="domainService" ></app-add-form>
             <a [routerLink]="['/skill/quiz/detail', rowData.id]" pButton pRipple type="button" icon="pi pi-eye" class="p-button-info mx-2"  ></a>
           </ng-template>
         </app-table>

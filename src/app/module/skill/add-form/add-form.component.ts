@@ -5,19 +5,24 @@ import {tap} from "rxjs";
 import {FormField} from "../../../core/models/FormField";
 import {BaseService} from "../../../core/service/BaseService";
 
+
 @Component({
   selector: 'app-add-form',
   templateUrl: './add-form.component.html',
   styleUrls: ['./add-form.component.scss']
 })
 export class AddFormComponent<T,I> {
-  constructor(private notificationService: NotificationService, private service: BaseService<T, I>) {
+  @Input()
+  service!: BaseService<T,I>
+  constructor(private notificationService: NotificationService) {
   }
 
   @ViewChild(FormComponent) form?: FormComponent;
   @Input()
   fields! :FormField[]
   showModal = false;
+  @Input()
+  title!: string;
 
   openModal() {
     this.showModal = true;
@@ -34,9 +39,10 @@ export class AddFormComponent<T,I> {
     }
     if (this.form?.form.valid) {
       this.service.save(this.form?.form.value).pipe(
-          tap((skill) => {
+          tap((t) => {
                 this.notificationService.showSuccess('Skill added successfully', 'Success');
                 this.closeModal();
+                this.service.updateData(t)
               }
           )
       )

@@ -2,7 +2,6 @@ import { HttpClient } from "@angular/common/http";
 import {IBaseService} from "./IBaseService";
 import {BehaviorSubject, Observable} from "rxjs";
 import {Page} from "../models/Page";
-
 export class BaseService<T,I> implements IBaseService<T, I>{
   findByName(name: string, page: number, size: number): Observable<Page<T>> {
     return this.httpClient.get<Page<T>>(`${this.url}/search`, {
