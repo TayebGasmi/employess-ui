@@ -18,7 +18,7 @@ export class TaskCardComponent {
     this.taskService.deleteTask(id).pipe(
       tap((task) => {
           this.notificationService.showSuccess('Task Deleted successfully', 'Success');
-
+          this.taskService.updateData();
         }
       )
     )

@@ -16,6 +16,7 @@ import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { AddSprintComponent } from './components/add-sprint/add-sprint.component';
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {SkillModule} from "../skill/skill.module";
 
 
 
@@ -40,7 +41,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     SharedModule,
     DropdownModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SkillModule
   ]
 })
 export class TaskModule { }

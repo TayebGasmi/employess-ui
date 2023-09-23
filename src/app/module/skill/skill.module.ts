@@ -43,42 +43,45 @@ import { DeleteDomainComponent } from './delete-domain/delete-domain.component';
 
 
 @NgModule({
-  declarations: [
-    SkillListComponent,
-    AddSkillComponent,
-    UpdateSkillComponent,
-    DeleteSkillComponent,
-    QuizListComponent,
-    DeleteQuizComponent,
-    AddQuizComponent,
-    UpdateQuizComponent,
-    QuizDetailsComponent,
-    QuizQuestionComponent,
-    QuizResponseComponent,
-    AddQuestionComponent,
-    QuestionComponent,
-    DomainListComponent,
-    ActivityListComponent,
-    AddActivityComponent,
-    UpdateActivityComponent,
-    UpdateDomainComponent,
-    AddDomainComponent,
-    AddFormComponent,
-    DeleteActivityComponent,
-    DeleteDomainComponent
-  ],
-  imports: [
-    CommonModule,
-    SkillRoutingModule,
-    SharedModule,
-    PaginatorModule,
-    ToolbarModule,
-    ButtonModule,
-    RippleModule,
-    DialogModule,
-    ConfirmDialogModule,
-    InputTextModule, ReactiveFormsModule, CardModule, DividerModule, CheckboxModule, InputTextareaModule, MenuModule, ToggleButtonModule, FileUploadModule
-  ]
+    declarations: [
+        SkillListComponent,
+        AddSkillComponent,
+        UpdateSkillComponent,
+        DeleteSkillComponent,
+        QuizListComponent,
+        DeleteQuizComponent,
+        AddQuizComponent,
+        UpdateQuizComponent,
+        QuizDetailsComponent,
+        QuizQuestionComponent,
+        QuizResponseComponent,
+        AddQuestionComponent,
+        QuestionComponent,
+        DomainListComponent,
+        ActivityListComponent,
+        AddActivityComponent,
+        UpdateActivityComponent,
+        UpdateDomainComponent,
+        AddDomainComponent,
+        AddFormComponent,
+        DeleteActivityComponent,
+        DeleteDomainComponent
+    ],
+    exports: [
+        DeleteDomainComponent
+    ],
+    imports: [
+        CommonModule,
+        SkillRoutingModule,
+        SharedModule,
+        PaginatorModule,
+        ToolbarModule,
+        ButtonModule,
+        RippleModule,
+        DialogModule,
+        ConfirmDialogModule,
+        InputTextModule, ReactiveFormsModule, CardModule, DividerModule, CheckboxModule, InputTextareaModule, MenuModule, ToggleButtonModule, FileUploadModule
+    ]
 })
 export class SkillModule {
 }
