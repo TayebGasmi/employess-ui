@@ -1,9 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
-import {SkillForm} from "../../../core/models/SkillForm";
-import {FormComponent} from "../../shared/form/form.component";
+import {tap} from "rxjs";
 import {NotificationService} from "../../shared/notification.service";
 import {SkillService} from "../../../core/service/skill.service";
-import {tap} from "rxjs";
+import {FormComponent} from "../../shared/form/form.component";
+import {SkillForm} from "../../../core/models/SkillForm";
 
 @Component({
   selector: 'app-add-skill',

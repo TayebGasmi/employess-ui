@@ -10,16 +10,18 @@ import {SprintServiceService} from "../../../../core/service/sprint-service.serv
   templateUrl: './task-page.component.html',
   styleUrls: ['./task-page.component.scss']
 })
-export class TaskPageComponent implements OnInit{
-    allTask$:Observable<Task[]> = this.taskService.getAllUndeletedTasks();
-     draggedTask : Task | null | undefined;
-     allSprints$:Observable<Sprint[]> = this.sprintService.getAllUndeletedSprints()
-       sprintOptions!:any;
-     selectedSprint!:any;
-  constructor(private taskService :TaskService,private sprintService:SprintServiceService) {
-    this.sprintService.getAllUndeletedSprints().subscribe(sprints=>{
-      sprints.forEach(sprint=>{
-        let sprintOption= {name:sprint.sprintTitle,value:sprint.id};
+export class TaskPageComponent implements OnInit {
+  allTask$: Observable<Task[]> = this.taskService.getAllUndeletedTasks();
+  draggedTask: Task | null | undefined;
+  allSprints$: Observable<Sprint[]> = this.sprintService.getAllUndeletedSprints()
+  sprintOptions!: any;
+  selectedSprint!: any;
+  protected readonly Sprint = Sprint;
+
+  constructor(private taskService: TaskService, private sprintService: SprintServiceService) {
+    this.sprintService.getAllUndeletedSprints().subscribe(sprints => {
+      sprints.forEach(sprint => {
+        let sprintOption = {name: sprint.sprintTitle, value: sprint.id};
         this.sprintOptions.push(sprintOption);
       })
     })
@@ -29,19 +31,18 @@ export class TaskPageComponent implements OnInit{
 
   }
 
-
   dragStart(task: Task) {
     this.draggedTask = task;
   }
+
   dragEnd() {
     this.draggedTask = null;
   }
-  drop(sprintId:string) {
+
+  drop(sprintId: string) {
     if (this.draggedTask) {
 
 
     }
   }
-
-  protected readonly Sprint = Sprint;
 }

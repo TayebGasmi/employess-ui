@@ -12,29 +12,32 @@ import {Domain} from "../../../core/models/Domain";
 })
 export class UpdateDomainComponent {
 
-    protected readonly DomainForm = DomainForm;
-    @Input()
-    data?: Domain
-    @ViewChild(FormComponent) form?: FormComponent;
-    constructor(private  notificationService: NotificationService, private service: DomainService) {
-    }
-    showModal= false;
+  @Input()
+  data?: Domain
+  @ViewChild(FormComponent) form?: FormComponent;
+  showModal = false;
+  protected readonly DomainForm = DomainForm;
 
-    closeModal() {
-        this.showModal = false;
+  constructor(private notificationService: NotificationService, private service: DomainService) {
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
+
+  save() {
+    if (this.form?.form.invalid) {
+      this.notificationService.showError('Form is invalid', 'Error');
+      return;
     }
-    save() {
-        if (this.form?.form.invalid) {
-            this.notificationService.showError('Form is invalid', 'Error');
-            return;
-        }
-        this.service.updateById( this.form?.form.value,this.data?.id||0,).subscribe((data) => {
-            this.notificationService.showSuccess('Skill updated successfully', 'Success');
-            this.closeModal();
-            this.service.updateData(data);
-        })
-    }
-    openModal() {
-        this.showModal = true;
-    }
+    this.service.updateById(this.form?.form.value, this.data?.id || 0,).subscribe((data) => {
+      this.notificationService.showSuccess('Skill updated successfully', 'Success');
+      this.closeModal();
+      this.service.updateData(data);
+    })
+  }
+
+  openModal() {
+    this.showModal = true;
+  }
 }

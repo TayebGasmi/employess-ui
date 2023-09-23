@@ -1,5 +1,5 @@
 export interface Quiz {
-    id: number,
-    name: string,
-    description: string,
+  id: number,
+  name: string,
+  description: string,
 }

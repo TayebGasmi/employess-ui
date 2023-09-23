@@ -1,7 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {ConfirmationService, ConfirmEventType} from "primeng/api";
 import {NotificationService} from "../../shared/notification.service";
-import {SkillService} from "../../../core/service/skill.service";
 import {QuizService} from "../../../core/service/quiz.service";
 
 @Component({
@@ -10,11 +9,13 @@ import {QuizService} from "../../../core/service/quiz.service";
   styleUrls: ['./delete-quiz.component.scss']
 })
 export class DeleteQuizComponent {
-@Input() quizId=0;
-  constructor(private confirmationService: ConfirmationService, private notificationService: NotificationService,private quizService:QuizService) {
-  }
+  @Input() quizId = 0;
   @Input()
-  id=0;
+  id = 0;
+
+  constructor(private confirmationService: ConfirmationService, private notificationService: NotificationService, private quizService: QuizService) {
+  }
+
   confirm() {
     this.confirmationService.confirm({
       message: 'Do you want to delete this record?',
@@ -22,7 +23,7 @@ export class DeleteQuizComponent {
       icon: 'pi pi-info-circle',
       accept: () => {
         console.log(this.id)
-        this.quizService.deleteQuizById(this.id).subscribe(()=>{
+        this.quizService.deleteQuizById(this.id).subscribe(() => {
           this.notificationService.showInfo('Info', 'Record deleted')
           this.quizService.updateQuizzes()
         })

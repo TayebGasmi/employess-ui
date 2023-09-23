@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UpdateActivityComponent } from './update-activity.component';
+import {UpdateActivityComponent} from './update-activity.component';
 
 describe('UpdateActivityComponent', () => {
   let component: UpdateActivityComponent;

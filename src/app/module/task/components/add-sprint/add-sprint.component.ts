@@ -1,9 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {NotificationService} from "../../../shared/notification.service";
-import {TaskService} from "../../../../core/service/TaskService";
 import {FormComponent} from "../../../shared/form/form.component";
 import {FormField} from "../../../../core/models/FormField";
-import {TaskFrom} from "../../../../core/models/TaskFrom";
 import {tap} from "rxjs";
 import {SprintServiceService} from "../../../../core/service/sprint-service.service";
 import {SprintForm} from "../../../../core/models/SprintForm";
@@ -14,15 +12,12 @@ import {SprintForm} from "../../../../core/models/SprintForm";
   styleUrls: ['./add-sprint.component.scss']
 })
 export class AddSprintComponent {
+  @ViewChild(FormComponent) form?: FormComponent;
+  showModal = false;
+  protected readonly sprintForm: FormField[] = SprintForm;
+
   constructor(private notificationService: NotificationService, private sprintService: SprintServiceService) {
   }
-
-  @ViewChild(FormComponent) form?: FormComponent;
-
-  protected readonly sprintForm : FormField[] = SprintForm;
-
-
-  showModal = false;
 
   openModal() {
     this.showModal = true;

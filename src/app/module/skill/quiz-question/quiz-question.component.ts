@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {BehaviorSubject, map, Observable, switchMap} from "rxjs";
 import {Question} from "../../../core/models/question";
 import {NotificationService} from "../../shared/notification.service";

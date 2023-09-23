@@ -1,5 +1,4 @@
 <app-add-question [updateQuestions$]="updateQuestions$"></app-add-question>
-
 <ng-container *ngIf="questions$ | async as questions">
   <ng-container *ngIf="questions.length > 0; else noQuestions">
 
@@ -11,14 +10,16 @@
         <span> Question {{currentIndex + 1 | number}} out of {{questions.length | number}}</span>
       </div>
       <!-- progress bar -->
-      <p-progressBar [value]="((currentIndex+1)/questions.length)*100" [showValue]="false"></p-progressBar>
+      <p-progressBar [showValue]="false" [value]="((currentIndex+1)/questions.length)*100"></p-progressBar>
       <app-question [index]="currentIndex" [question]="questions[currentIndex]"
                     [updateQuestions$]="updateQuestions$"></app-question>
     </div>
 
     <div class="flex justify-content-between ">
-      <p-button *ngIf="currentIndex !== 0" label="Previous" icon="pi pi-chevron-left" (onClick)="previousQuestion()" class="p-button-outlined my-1"></p-button>
-      <p-button *ngIf="currentIndex < questions.length - 1" label="Next" icon="pi pi-chevron-right" (onClick)="nextQuestion()" class="p-button-outlined my-1"></p-button>
+      <p-button (onClick)="previousQuestion()" *ngIf="currentIndex !== 0" class="p-button-outlined my-1" icon="pi pi-chevron-left"
+                label="Previous"></p-button>
+      <p-button (onClick)="nextQuestion()" *ngIf="currentIndex < questions.length - 1" class="p-button-outlined my-1"
+                icon="pi pi-chevron-right" label="Next"></p-button>
     </div>
   </ng-container>
   <ng-template #noQuestions>

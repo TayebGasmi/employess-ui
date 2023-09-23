@@ -3,9 +3,6 @@ import {NotificationService} from "../../../shared/notification.service";
 import {FormComponent} from "../../../shared/form/form.component";
 import {tap} from "rxjs";
 import {TaskService} from "../../../../core/service/TaskService";
-import {Validators} from "@angular/forms";
-import {TaskType} from "../../../../core/models/task-type.enum";
-import {TaskStatus} from "../../../../core/models/task-status.enum";
 import {FormField} from "../../../../core/models/FormField";
 import {TaskFrom} from "../../../../core/models/TaskFrom";
 
@@ -15,15 +12,12 @@ import {TaskFrom} from "../../../../core/models/TaskFrom";
   styleUrls: ['./add-task.component.scss']
 })
 export class AddTaskComponent {
+  @ViewChild(FormComponent) form?: FormComponent;
+  showModal = false;
+  protected readonly taskForm: FormField[] = TaskFrom;
+
   constructor(private notificationService: NotificationService, private taskService: TaskService) {
   }
-
-  @ViewChild(FormComponent) form?: FormComponent;
-
-  protected readonly taskForm : FormField[] = TaskFrom;
-
-
-  showModal = false;
 
   openModal() {
     this.showModal = true;

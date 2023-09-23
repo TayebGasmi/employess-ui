@@ -3,7 +3,6 @@ import {ActivityForm} from "../../../core/models/ActivityForm";
 import {Domain} from "../../../core/models/Domain";
 import {FormComponent} from "../../shared/form/form.component";
 import {NotificationService} from "../../shared/notification.service";
-import {DomainService} from "../../../core/service/domain.service";
 import {ActivityService} from "../../../core/service/activity.service";
 
 @Component({
@@ -13,28 +12,31 @@ import {ActivityService} from "../../../core/service/activity.service";
 })
 export class UpdateActivityComponent {
 
-  protected readonly ActivityForm = ActivityForm;
   @Input()
   data?: Domain
   @ViewChild(FormComponent) form?: FormComponent;
-  constructor(private  notificationService: NotificationService, private service: ActivityService ) {
+  showModal = false;
+  protected readonly ActivityForm = ActivityForm;
+
+  constructor(private notificationService: NotificationService, private service: ActivityService) {
   }
-  showModal= false;
 
   closeModal() {
     this.showModal = false;
   }
+
   save() {
     if (this.form?.form.invalid) {
       this.notificationService.showError('Form is invalid', 'Error');
       return;
     }
-    this.service.updateById( this.form?.form.value,this.data?.id||0,).subscribe((data) => {
+    this.service.updateById(this.form?.form.value, this.data?.id || 0,).subscribe((data) => {
       this.notificationService.showSuccess('Skill updated successfully', 'Success');
       this.closeModal();
       this.service.updateData(data);
     })
   }
+
   openModal() {
     this.showModal = true;
   }

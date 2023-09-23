@@ -26,6 +26,7 @@ interface Pagination {
   rows: number;
   page: number;
 }
+
 @Component({
   selector: 'app-quiz-list',
   templateUrl: './quiz-list.component.html',
@@ -33,14 +34,11 @@ interface Pagination {
 })
 
 export class QuizListComponent {
-  domainType:Domain={
-    name:'k'
-  }
-  constructor(private notificationService: NotificationService,private quizService: QuizService,private confirmationService: ConfirmationService,private route: ActivatedRoute,public domainService:DomainService) {
-
+  domainType: Domain = {
+    name: 'k'
   }
   updateQuizzes$ = this.quizService.updateQuizzes$;
-  skillId$:Observable<number> = this.route.params.pipe(
+  skillId$: Observable<number> = this.route.params.pipe(
     map(params => params["id"])
   )
   skillHeaders: TableColumnHeader[] = [
@@ -51,7 +49,7 @@ export class QuizListComponent {
       dataKey: 'description',
     },
   ];
-  pagination$:BehaviorSubject<Pagination>=new BehaviorSubject<Pagination>({rows:10,page:0});
+  pagination$: BehaviorSubject<Pagination> = new BehaviorSubject<Pagination>({rows: 10, page: 0});
   name = new FormControl('');
   search$ = this.name.valueChanges.pipe(
     debounceTime(300),
@@ -65,48 +63,53 @@ export class QuizListComponent {
     this.updateQuizzes$,
     this.skillId$
   ]).pipe(
-    switchMap(([pagination, name,_,id]) => {
+    switchMap(([pagination, name, _, id]) => {
       if (name) {
-        return this.quizService.getQuizBySkillIdAndName(id,name, pagination.page ?? 0, pagination.rows ?? 10);
+        return this.quizService.getQuizBySkillIdAndName(id, name, pagination.page ?? 0, pagination.rows ?? 10);
       }
-      return this.quizService.getQuizzesBySkill(id,pagination.page ?? 0, pagination.rows ?? 10);
+      return this.quizService.getQuizzesBySkill(id, pagination.page ?? 0, pagination.rows ?? 10);
 
     }),
     tap((page) => this.totalItems$.next(page.totalElements))
   );
-
   first: number = 0;
+  @ViewChild('table') table: any;
+  cols = [
+    {field: 'name', header: 'Name'},
+    {field: 'description', header: 'Description'},
+  ];
+  protected readonly DomainForm = DomainForm;
 
+  constructor(private notificationService: NotificationService, private quizService: QuizService, private confirmationService: ConfirmationService, private route: ActivatedRoute, public domainService: DomainService) {
+
+  }
 
   onPageChange(event: any) {
-    this.first = event.first ;
-    this.pagination$.next({rows:event.rows,page:event.page});
+    this.first = event.first;
+    this.pagination$.next({rows: event.rows, page: event.page});
   }
-  @ViewChild('table') table: any;
+
   exportExcel() {
     console.log(this.table);
     this.table.dt.exportCSV();
   }
-  cols=[
-    { field: 'name', header: 'Name' },
-    { field: 'description', header: 'Description' },
-  ];
 
   deleteAll() {
     this.quizService.deleteAllQuizzes(this.table.selectedRow).subscribe(value => {
-      this.notificationService.showInfo("Deleted successfully","Delete")
-      this.quizService.updateQuizzes()
-    });}
-
-  delete(rowData: any):void|undefined {
-    this.quizService.deleteQuizById(rowData.id).subscribe(value => {
-      this.notificationService.showInfo("Deleted successfully","Delete")
+      this.notificationService.showInfo("Deleted successfully", "Delete")
       this.quizService.updateQuizzes()
     });
   }
 
-  confirm($event:MouseEvent) {
-    $event .stopPropagation()
+  delete(rowData: any): void | undefined {
+    this.quizService.deleteQuizById(rowData.id).subscribe(value => {
+      this.notificationService.showInfo("Deleted successfully", "Delete")
+      this.quizService.updateQuizzes()
+    });
+  }
+
+  confirm($event: MouseEvent) {
+    $event.stopPropagation()
     this.confirmationService.confirm({
       message: 'Do you want to delete this record?',
       header: 'Delete Confirmation',
@@ -127,7 +130,4 @@ export class QuizListComponent {
       }
     });
   }
-
-
-  protected readonly DomainForm = DomainForm;
 }

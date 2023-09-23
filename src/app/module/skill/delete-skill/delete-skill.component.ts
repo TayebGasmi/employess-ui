@@ -9,10 +9,12 @@ import {SkillService} from "../../../core/service/skill.service";
   styleUrls: ['./delete-skill.component.scss']
 })
 export class DeleteSkillComponent {
-  constructor(private confirmationService: ConfirmationService, private notificationService: NotificationService,private skillService:SkillService) {
-  }
   @Input()
-  id=0;
+  id = 0;
+
+  constructor(private confirmationService: ConfirmationService, private notificationService: NotificationService, private skillService: SkillService) {
+  }
+
   confirm() {
     this.confirmationService.confirm({
       message: 'Do you want to delete this record?',
@@ -20,7 +22,7 @@ export class DeleteSkillComponent {
       icon: 'pi pi-info-circle',
       accept: () => {
         console.log(this.id)
-        this.skillService.deleteSkillById(this.id).subscribe(()=>{
+        this.skillService.deleteSkillById(this.id).subscribe(() => {
           this.notificationService.showInfo('Info', 'Record deleted')
           this.skillService.updateSkills()
         })

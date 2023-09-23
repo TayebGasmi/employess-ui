@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DeleteDomainComponent } from './delete-domain.component';
+import {DeleteDomainComponent} from './delete-domain.component';
 
 describe('DeleteDomainComponent', () => {
   let component: DeleteDomainComponent;

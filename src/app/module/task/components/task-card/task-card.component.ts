@@ -10,11 +10,13 @@ import {NotificationService} from "../../../shared/notification.service";
   styleUrls: ['./task-card.component.scss']
 })
 export class TaskCardComponent {
-  @Input() task!:Task;
-  constructor(private taskService:TaskService,private notificationService:NotificationService) {
+  @Input() task!: Task;
+
+  constructor(private taskService: TaskService, private notificationService: NotificationService) {
 
   }
-  deleteTask(id:string){
+
+  deleteTask(id: string) {
     this.taskService.deleteTask(id).pipe(
       tap((task) => {
           this.notificationService.showSuccess('Task Deleted successfully', 'Success');
@@ -24,12 +26,13 @@ export class TaskCardComponent {
     )
       .subscribe()
   }
-  duplicateTask(id:string){
+
+  duplicateTask(id: string) {
     this.taskService.duplicateTask(id).pipe(
-      tap((task:Task)=>{
-      this.notificationService.showSuccess('Task Duplicated successfully', 'Success');
-    }))
+      tap((task: Task) => {
+        this.notificationService.showSuccess('Task Duplicated successfully', 'Success');
+      }))
 
       .subscribe();
-}
+  }
 }

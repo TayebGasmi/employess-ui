@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {SkillListComponent} from "./skill-list/skill-list.component";
 import {QuizListComponent} from "./quiz-list/quiz-list.component";
 import {QuizQuestionComponent} from "./quiz-question/quiz-question.component";
@@ -7,6 +7,7 @@ import {QuizResponseComponent} from "./quiz-response/quiz-response.component";
 import {QuizDetailsComponent} from "./quiz-details/quiz-details.component";
 import {ActivityListComponent} from "./activity-list/activity-list.component";
 import {DomainListComponent} from "./domain-list/domain-list.component";
+import {AuthGuard} from "../../guard/auth.guard";
 
 const routes: Routes = [
 
@@ -16,11 +17,13 @@ const routes: Routes = [
       {
         path: "",
         component: SkillListComponent,
-        pathMatch: "full"
+        pathMatch: "full",
       },
       {
         path: "quiz/:id",
         component: QuizListComponent,
+        canActivate: [AuthGuard],
+
       },
       {
         path: "quiz/detail/:id",
@@ -35,15 +38,15 @@ const routes: Routes = [
         component: QuizResponseComponent
       }
       ,
-        {
-            path: 'activity',
-            component:ActivityListComponent
-        }
-        ,
-        {
-            path: 'domain',
-            component:DomainListComponent
-        }
+      {
+        path: 'activity',
+        component: ActivityListComponent
+      }
+      ,
+      {
+        path: 'domain',
+        component: DomainListComponent
+      }
     ],
 
 
@@ -56,4 +59,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class SkillRoutingModule { }
+export class SkillRoutingModule {
+}

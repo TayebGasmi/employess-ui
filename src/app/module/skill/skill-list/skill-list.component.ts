@@ -5,11 +5,11 @@ import {
   BehaviorSubject,
   combineLatest,
   debounceTime,
-  distinctUntilChanged, last,
-  map,
+  distinctUntilChanged,
   Observable,
   startWith,
-  switchMap, tap
+  switchMap,
+  tap
 } from "rxjs";
 import {Page} from "../../../core/models/Page";
 import {Skill} from "../../../core/models/Skill";
@@ -22,15 +22,13 @@ interface Pagination {
   rows: number;
   page: number;
 }
+
 @Component({
   selector: 'app-skill-list',
   templateUrl: './skill-list.component.html',
   styleUrls: ['./skill-list.component.scss']
 })
 export class SkillListComponent {
-constructor(private notificationService: NotificationService,private skillService: SkillService,private confirmationService: ConfirmationService) {
-
-}
   updateSkills$ = this.skillService.updateSkills$;
   skillHeaders: TableColumnHeader[] = [
     {
@@ -40,7 +38,7 @@ constructor(private notificationService: NotificationService,private skillServic
       dataKey: 'description',
     },
   ];
-  pagination$:BehaviorSubject<Pagination>=new BehaviorSubject<Pagination>({rows:10,page:0});
+  pagination$: BehaviorSubject<Pagination> = new BehaviorSubject<Pagination>({rows: 10, page: 0});
   name = new FormControl('');
   search$ = this.name.valueChanges.pipe(
     debounceTime(300),
@@ -54,43 +52,46 @@ constructor(private notificationService: NotificationService,private skillServic
     this.updateSkills$,
   ]).pipe(
     switchMap(([pagination, name]) => {
-        if(name)
-        {
-          return this.skillService.searchSkills(name, pagination.page ?? 0, pagination.rows ?? 10);
-        }
+      if (name) {
+        return this.skillService.searchSkills(name, pagination.page ?? 0, pagination.rows ?? 10);
+      }
 
-        return this.skillService.getAllSkills(pagination.page ?? 0, pagination.rows ?? 10);
+      return this.skillService.getAllSkills(pagination.page ?? 0, pagination.rows ?? 10);
 
     }),
     tap((page) => this.totalItems$.next(page.totalElements))
   );
-
   first: number = 0;
+  @ViewChild('table') table: any;
+  cols = [
+    {field: 'name', header: 'Name'},
+    {field: 'description', header: 'Description'},
+  ];
 
+  constructor(private notificationService: NotificationService, private skillService: SkillService, private confirmationService: ConfirmationService) {
+
+  }
 
   onPageChange(event: any) {
-    this.first = event.first ;
-    this.pagination$.next({rows:event.rows,page:event.page});
+    this.first = event.first;
+    this.pagination$.next({rows: event.rows, page: event.page});
   }
-  @ViewChild('table') table: any;
+
   exportExcel() {
     console.log(this.table);
     this.table.dt.exportCSV();
   }
-  cols=[
-    { field: 'name', header: 'Name' },
-    { field: 'description', header: 'Description' },
-  ];
 
   deleteAll() {
     this.skillService.deleteSkills(this.table.selectedRow).subscribe(value => {
-      this.notificationService.showInfo("Deleted successfully","Delete")
+      this.notificationService.showInfo("Deleted successfully", "Delete")
       this.skillService.updateSkills();
-  });}
+    });
+  }
 
-  delete(rowData: any):void|undefined {
+  delete(rowData: any): void | undefined {
     this.skillService.deleteSkillById(rowData.id).subscribe(value => {
-      this.notificationService.showInfo("Deleted successfully","Delete")
+      this.notificationService.showInfo("Deleted successfully", "Delete")
       this.skillService.updateSkills();
     });
   }

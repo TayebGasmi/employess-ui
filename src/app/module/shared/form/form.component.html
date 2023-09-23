@@ -5,27 +5,27 @@
 
       <div class="input-container">
         <ng-container [ngSwitch]="field.type">
-          <input pInputText *ngSwitchDefault
-                 [formControlName]="field.name"
+          <input *ngSwitchDefault [formControlName]="field.name"
                  [id]="field.name"
                  [ngClass]="{'ng-invalid ng-dirty mr-2': showFieldErrors(field.name)}"
                  [placeholder]="field.placeholder || ''"
                  [type]="field.type"
+                 pInputText
           />
           <p-inputNumber *ngSwitchCase="'number'"
                          [formControlName]="field.name"
                          [id]="field.name"
+                         [max]="100"
+                         [min]="0"
                          [ngClass]="{'ng-invalid ng-dirty mr-2': showFieldErrors(field.name)}"
                          [placeholder]="field.placeholder || ''"
-                         [min]="0"
-                         [max]="100"
                          [step]="1"
           ></p-inputNumber>
-          <p-password *ngSwitchCase="'password'" [toggleMask]="true"
-                      [formControlName]="field.name"
+          <p-password *ngSwitchCase="'password'" [formControlName]="field.name"
                       [id]="field.name"
                       [ngClass]="{'ng-invalid ng-dirty mr-2': showFieldErrors(field.name)}"
                       [placeholder]="field.placeholder || ''"
+                      [toggleMask]="true"
           ></p-password>
           <p-calendar *ngSwitchCase="'date'"
                       [formControlName]="field.name"
@@ -33,29 +33,29 @@
                       [ngClass]="{'ng-invalid ng-dirty mr-2': showFieldErrors(field.name)}"
                       [placeholder]="field.placeholder || ''"
           ></p-calendar>
-          <textarea *ngSwitchCase="'textarea'" pInputTextarea
-                    [formControlName]="field.name"
+          <textarea *ngSwitchCase="'textarea'" [formControlName]="field.name"
                     [id]="field.name"
                     [ngClass]="{'ng-invalid ng-dirty mr-2': showFieldErrors(field.name)}"
                     [placeholder]="field.placeholder || ''"
+                    pInputTextarea
           ></textarea>
-          <p-checkbox *ngSwitchCase="'checkbox'" [formControlName]="field.name"
+          <p-checkbox *ngSwitchCase="'checkbox'" [binary]="true"
+                      [formControlName]="field.name"
                       [id]="field.name"
-                      [ngClass]="{'ng-invalid ng-dirty mr-2': showFieldErrors(field.name)}"
-                      [binary]="true"
                       [label]="field.label"
+                      [ngClass]="{'ng-invalid ng-dirty mr-2': showFieldErrors(field.name)}"
           ></p-checkbox>
           <p-multiSelect *ngSwitchCase="'select'"
                          [formControlName]="field.name"
                          [id]="field.name"
                          [ngClass]="{'ng-invalid ng-dirty mr-2': showFieldErrors(field.name)}"
-                         [options]="field.options"
                          [optionLabel]="field.placeholder || ''"
+                         [options]="field.options"
                          display="chip"
           ></p-multiSelect>
-          <p-dropdown *ngSwitchCase="'dropdown'" [options]="field.options" [filter]="true" [showClear]="true"
+          <p-dropdown *ngSwitchCase="'dropdown'" [filter]="true" [formControlName]="field.name" [options]="field.options"
                       [placeholder]="field.placeholder || ''"
-                      [formControlName]="field.name">
+                      [showClear]="true">
           </p-dropdown>
           <ng-container *ngSwitchCase="'radio'">
             <div *ngFor="let option of field.options;let index=index; ">
@@ -73,7 +73,7 @@
             </div>
           </ng-container>
         </ng-container>
-        <div class="text-base text-red-500 mt-2" *ngIf="showFieldErrors(field.name)">Invalid {{ field.label }}</div>
+        <div *ngIf="showFieldErrors(field.name)" class="text-base text-red-500 mt-2">Invalid {{ field.label }}</div>
       </div>
     </div>
   </ng-container>

@@ -1,10 +1,10 @@
-<button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-warning mr-2" (click)="openModal()" ></button>
+<button (click)="openModal()" class="p-button-warning mr-2" icon="pi pi-pencil" pButton pRipple type="button"></button>
 
-<p-dialog  [(visible)]="showModal" [style]="{ width: '50vw' }" [header]="'update skill'" [modal]="true" class="p-fluid">
-    <app-form [fields]="ActivityForm" [formData]="data">
-    </app-form>
-    <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="closeModal()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
-    </ng-template>
+<p-dialog [(visible)]="showModal" [header]="'update skill'" [modal]="true" [style]="{ width: '50vw' }" class="p-fluid">
+  <app-form [fields]="ActivityForm" [formData]="data">
+  </app-form>
+  <ng-template pTemplate="footer">
+    <button (click)="closeModal()" class="p-button-text" icon="pi pi-times" label="Cancel" pButton pRipple></button>
+    <button (click)="save()" class="p-button-text" icon="pi pi-check" label="Save" pButton pRipple></button>
+  </ng-template>
 </p-dialog>

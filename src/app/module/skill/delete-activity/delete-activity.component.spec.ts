@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DeleteActivityComponent } from './delete-activity.component';
+import {DeleteActivityComponent} from './delete-activity.component';
 
 describe('DeleteActivityComponent', () => {
   let component: DeleteActivityComponent;

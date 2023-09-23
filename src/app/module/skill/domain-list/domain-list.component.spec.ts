@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DomainListComponent } from './domain-list.component';
+import {DomainListComponent} from './domain-list.component';
 
 describe('DomainListComponent', () => {
   let component: DomainListComponent;

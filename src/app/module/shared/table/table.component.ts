@@ -6,7 +6,7 @@ import {TableColumnHeader} from "../../../core/models/tableColumnHeader";
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent  implements OnInit {
+export class TableComponent implements OnInit {
   @Input()
   dataSource?: any[]
   @Input()
@@ -17,10 +17,11 @@ export class TableComponent  implements OnInit {
   search?: TemplateRef<any>
   @Input()
   title?: string;
-  selectedRow=[];
+  selectedRow = [];
   @Input()
   cols: any[] = [];
   @ViewChild('dt') dt: any;
+
   ngOnInit(): void {
     if (!this.headers && this.dataSource) {
       if (this.dataSource[0]) {

@@ -11,18 +11,18 @@ import {BaseService} from "../../../core/service/BaseService";
   templateUrl: './add-form.component.html',
   styleUrls: ['./add-form.component.scss']
 })
-export class AddFormComponent<T,I> {
+export class AddFormComponent<T, I> {
   @Input()
-  service!: BaseService<T,I>
-  constructor(private notificationService: NotificationService) {
-  }
-
+  service!: BaseService<T, I>
   @ViewChild(FormComponent) form?: FormComponent;
   @Input()
-  fields! :FormField[]
+  fields!: FormField[]
   showModal = false;
   @Input()
   title!: string;
+
+  constructor(private notificationService: NotificationService) {
+  }
 
   openModal() {
     this.showModal = true;
@@ -39,14 +39,14 @@ export class AddFormComponent<T,I> {
     }
     if (this.form?.form.valid) {
       this.service.save(this.form?.form.value).pipe(
-          tap((t) => {
-                this.notificationService.showSuccess('Skill added successfully', 'Success');
-                this.closeModal();
-                this.service.updateData(t)
-              }
-          )
+        tap((t) => {
+            this.notificationService.showSuccess('Skill added successfully', 'Success');
+            this.closeModal();
+            this.service.updateData(t)
+          }
+        )
       )
-          .subscribe()
+        .subscribe()
     }
   }
 }

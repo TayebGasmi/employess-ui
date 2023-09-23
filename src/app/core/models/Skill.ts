@@ -1,6 +1,6 @@
 export interface Skill {
-    id: number,
-    name: string;
-    description?: string;
-    userId?: number;
+  id: number,
+  name: string;
+  description?: string;
+  userId?: number;
 }

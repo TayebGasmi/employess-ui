@@ -3,7 +3,7 @@
     <ng-container *ngIf="allTask$ | async as tasksList">
       <p-toolbar styleClass="mb-4">
         <ng-template pTemplate="left">
-          <div >
+          <div>
             <app-add-task></app-add-task>
           </div>
         </ng-template>
@@ -11,9 +11,10 @@
 
       </p-toolbar>
 
-      <div *ngFor="let task of tasksList" class="overflow-auto" pDraggable="tasks" (onDragStart)="dragStart(task)" (onDragEnd)="dragEnd()">
+      <div (onDragEnd)="dragEnd()" (onDragStart)="dragStart(task)" *ngFor="let task of tasksList" class="overflow-auto"
+           pDraggable="tasks">
         <app-task-card
-        [task]="task"  >
+          [task]="task">
 
         </app-task-card>
       </div>
@@ -22,7 +23,7 @@
   </div>
 
 
-  <div class="col-13 md:col-9 drop-column" pDroppable="tasks" style="widht: 100%" (onDrop)="drop('cc')"  >
+  <div (onDrop)="drop('cc')" class="col-13 md:col-9 drop-column" pDroppable="tasks" style="widht: 100%">
     <p-toolbar styleClass="mb-4">
       <ng-template pTemplate="left">
         <div class="flex flex-row flex-wrap card-container blue-container">
@@ -38,7 +39,7 @@
     <div class="grid">
 
       <div class="col">
-1
+        1
       </div>
       <div class="col">1</div>
       <div class="col">1</div>

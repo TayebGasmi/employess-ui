@@ -12,7 +12,7 @@ export class FormComponent implements OnInit {
   fields: FormField[] = [];
   form: FormGroup = new FormGroup({});
   @Input()
-  formData:any  = {};
+  formData: any = {};
   @ContentChild('formButtons')
   formButtons?: TemplateRef<any>;
 

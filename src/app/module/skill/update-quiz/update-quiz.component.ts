@@ -13,8 +13,9 @@ import {FormComponent} from "../../shared/form/form.component";
 export class UpdateQuizComponent {
   @Input() quiz?: Quiz;
   @ViewChild(FormComponent) form?: FormComponent;
+  showModal = false;
   protected readonly QuizForm = QuizForm;
-  showModal= false;
+
   constructor(private quizService: QuizService,
               private notificationService: NotificationService) {
   }
@@ -22,17 +23,19 @@ export class UpdateQuizComponent {
   closeModal() {
     this.showModal = false;
   }
+
   save() {
     if (this.form?.form.invalid) {
       this.notificationService.showError('Form is invalid', 'Error');
       return;
     }
-    this.quizService.updateQuizById(this.quiz?.id||0, this.form?.form.value).subscribe((skill) => {
+    this.quizService.updateQuizById(this.quiz?.id || 0, this.form?.form.value).subscribe((skill) => {
       this.notificationService.showSuccess('Skill updated successfully', 'Success');
       this.closeModal();
       this.quizService.updateQuizzes(skill)
     })
   }
+
   openModal() {
     this.showModal = true;
   }

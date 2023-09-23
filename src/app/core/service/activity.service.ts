@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BaseService} from "./BaseService";
 import {environment} from "../../../environments/environment";
 import {Activity} from "../models/Activity";
 import {HttpClient} from "@angular/common/http";
+
 const skillUrl = environment.skillUrl
 
 @Injectable({
@@ -11,9 +12,8 @@ const skillUrl = environment.skillUrl
 
 export class ActivityService extends BaseService<Activity, number> {
 
-  constructor(private http:HttpClient )
-   {
+  constructor(private http: HttpClient) {
     const baseUrl = `${skillUrl}/activity`
-    super(http,baseUrl);
+    super(http, baseUrl);
   }
 }
