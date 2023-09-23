@@ -63,5 +63,8 @@ export class QuizService {
             }
         });
     }
+    deleteAllQuizzes(quizzes: Quiz[]): Observable<void> {
+        return this.http.put<void>(`${this.baseUrl}/delete`, quizzes);
+    }
 
 }

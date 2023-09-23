@@ -1,5 +1,5 @@
-<div class="card grid grid-nogutter">
-  <div class="col-12 md:col-6 drag-column" style="width: 20%">
+<div class="card grid">
+  <div class="col-2 drag-column">
     <ng-container *ngIf="allTask$ | async as tasksList">
       <p-toolbar styleClass="mb-4">
         <ng-template pTemplate="left">
@@ -22,13 +22,28 @@
   </div>
 
 
-  <div class="col-13 md:col-9 drop-column" pDroppable="tasks" style="widht: 100%" (onDrop)="drop('cc')"  >
+  <div class="col-10  drop-column" pDroppable="tasks" (onDrop)="drop()"  >
     <p-toolbar styleClass="mb-4">
       <ng-template pTemplate="left">
         <div class="flex flex-row flex-wrap card-container blue-container">
           <app-add-sprint></app-add-sprint>
+          <ng-container *ngIf="allSprints$ | async as allSprints"  >
+            <!--<form>-->
+            <!--<app-delete-domain></app-delete-domain>-->
+
+              <p-dropdown   [options]="allSprints" [formControl]="selectedSprint" optionLabel="sprintTitle" placeholder="Select a Sprint"></p-dropdown>
 
 
+
+            <!--</form>-->
+          </ng-container>
+<!--          <ng-container *ngIf="selectedSprint.id !== undefined">-->
+
+<!--              <i class="pi pi-trash product-category-icon pl-1"  ></i>-->
+
+<!--              <i class="pi pi-copy product-category-icon pl-1"  ></i>-->
+
+<!--          </ng-container>-->
         </div>
       </ng-template>
 
@@ -36,14 +51,26 @@
     </p-toolbar>
 
     <div class="grid">
+      <ng-container *ngIf="sprintTasks$ as tasks">
 
+        {{tasks|json}}
+      </ng-container>
       <div class="col">
-1
+        <h3>To do </h3>
       </div>
-      <div class="col">1</div>
-      <div class="col">1</div>
-      <div class="col">1</div>
-      <div class="col">1</div>
+      <div class="col border-round">
+        <h3 >In Progress</h3>
+      </div>
+      <div class="col ">
+        <h3 >Review</h3>
+      </div>
+      <div class="col ">
+        <h3 >Test</h3>
+      </div>
+      <div class="col">
+        <h3>Done</h3>
+      </div>
+
 
     </div>
   </div>

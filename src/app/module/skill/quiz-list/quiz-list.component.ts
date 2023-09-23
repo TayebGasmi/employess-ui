@@ -1,6 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
 import {NotificationService} from "../../shared/notification.service";
-import {SkillService} from "../../../core/service/skill.service";
 import {ConfirmationService, ConfirmEventType} from "primeng/api";
 import {TableColumnHeader} from "../../../core/models/tableColumnHeader";
 import {
@@ -8,13 +7,18 @@ import {
   combineLatest,
   debounceTime,
   distinctUntilChanged,
+  map,
   Observable,
   startWith,
-  switchMap, tap
+  switchMap,
+  tap
 } from "rxjs";
 import {FormControl} from "@angular/forms";
 import {Page} from "../../../core/models/Page";
 import {Skill} from "../../../core/models/Skill";
+import {QuizService} from "../../../core/service/quiz.service";
+import {ActivatedRoute} from "@angular/router";
+
 interface Pagination {
   rows: number;
   page: number;
@@ -26,16 +30,13 @@ interface Pagination {
 })
 
 export class QuizListComponent {
-  constructor(private notificationService: NotificationService,private skillService: SkillService,private confirmationService: ConfirmationService) {
+  constructor(private notificationService: NotificationService,private quizService: QuizService,private confirmationService: ConfirmationService,private route: ActivatedRoute) {
 
   }
-  updateSkills$ = this.skillService.updateSkills$;
-  paginationDefaults = {
-    currentSize: 5,
-    currentPage: 1,
-    sizeOptions: [1, 5, 10, 25],
-    maxSize: 10,
-  };
+  updateQuizzes$ = this.quizService.updateQuizzes$;
+  skillId$:Observable<number> = this.route.params.pipe(
+    map(params => params["id"])
+  )
   skillHeaders: TableColumnHeader[] = [
     {
       dataKey: 'name',
@@ -52,16 +53,17 @@ export class QuizListComponent {
     startWith(''),
   );
   totalItems$: BehaviorSubject<number> = new BehaviorSubject(100);
-  skills$: Observable<Page<Skill>> = combineLatest([
+  quizzes$: Observable<Page<Skill>> = combineLatest([
     this.pagination$,
     this.search$,
-    this.updateSkills$,
+    this.updateQuizzes$,
+    this.skillId$
   ]).pipe(
-    switchMap(([pagination, name]) => {
+    switchMap(([pagination, name,_,id]) => {
       if (name) {
-        return this.skillService.searchSkills(name, pagination.page ?? 0, pagination.rows ?? 10);
+        return this.quizService.getQuizBySkillIdAndName(id,name, pagination.page ?? 0, pagination.rows ?? 10);
       }
-      return this.skillService.getAllSkills(pagination.page ?? 0, pagination.rows ?? 10);
+      return this.quizService.getQuizzesBySkill(id,pagination.page ?? 0, pagination.rows ?? 10);
 
     }),
     tap((page) => this.totalItems$.next(page.totalElements))
@@ -85,15 +87,15 @@ export class QuizListComponent {
   ];
 
   deleteAll() {
-    this.skillService.deleteSkills(this.table.selectedRow).subscribe(value => {
+    this.quizService.deleteAllQuizzes(this.table.selectedRow).subscribe(value => {
       this.notificationService.showInfo("Deleted successfully","Delete")
-      this.skillService.updateSkills();
+      this.quizService.updateQuizzes()
     });}
 
   delete(rowData: any):void|undefined {
-    this.skillService.deleteSkillById(rowData.id).subscribe(value => {
+    this.quizService.deleteQuizById(rowData.id).subscribe(value => {
       this.notificationService.showInfo("Deleted successfully","Delete")
-      this.skillService.updateSkills();
+      this.quizService.updateQuizzes()
     });
   }
 
@@ -119,5 +121,6 @@ export class QuizListComponent {
       }
     });
   }
+
 
 }

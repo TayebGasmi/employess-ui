@@ -1,0 +1,54 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-6 py-6">
+            <p-toolbar styleClass="mb-4"    >
+                <ng-template pTemplate="left">
+                    <div class="my-2">
+                        <app-add-domain></app-add-domain>
+                        <ng-container  *ngTemplateOutlet="deleteALL"></ng-container>
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="exportExcel()" ></button>
+                </ng-template>
+            </p-toolbar>
+
+            <ng-container *ngIf="data$ | async as quizzes">
+                <app-table  #table [dataSource]="quizzes.content" [title]="'Manage Domain'" [headers]="skillHeaders" [cols]="cols">
+                    <ng-template #search>
+          <span class="p-input-icon-left">
+    <i class="pi pi-search"></i>
+    <input type="text" pInputText placeholder="Search..." class="w-full sm:w-auto" [formControl]="name"/>
+</span>
+                    </ng-template>
+                    <ng-template #actions let-rowData >
+                        <app-update-domain [data]="rowData"> </app-update-domain>
+                        <app-delete-domain [id]="rowData.id"></app-delete-domain>
+                    </ng-template>
+                </app-table>
+            </ng-container>
+            <ng-container *ngIf="totalItems$ | async as totalItems">
+                <div class="grid">
+                    <div class="col-2 flex align-items-center justify-content-center ">
+                        <span>{{ totalItems }} items total</span>
+                    </div>
+                    <p-paginator class="col-10 "
+                                 *ngIf="pagination$ | async as pagination"
+                                 (onPageChange)="onPageChange($event)"
+                                 [first]="first"
+                                 [rows]="pagination.rows"
+                                 [totalRecords]="totalItems"
+                                 [rowsPerPageOptions]="[10, 20, 30]"
+                    ></p-paginator>
+                </div>
+            </ng-container>
+
+        </div>
+    </div>
+</div>
+<ng-template #deleteALL>
+    <p-confirmDialog [style]="{width: '50vw'} " [key]="'deleteAll'">
+    </p-confirmDialog>
+    <button pButton pRipple label="Delete"  icon="pi pi-trash" class="p-button-danger"  (click)="confirm($event)"></button>
+</ng-template>

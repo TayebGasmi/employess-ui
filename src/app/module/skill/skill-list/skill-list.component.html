@@ -20,7 +20,7 @@
         <ng-template #search>
           <span class="p-input-icon-left">
     <i class="pi pi-search"></i>
-    <input type="text" pInputText placeholder="Search..."  class="w-full sm:w-auto" [formControl]="name" />
+    <input type="text" pInputText placeholder="Search..." class="w-full sm:w-auto" [formControl]="name"/>
 </span>
         </ng-template>
         <ng-template #actions let-rowData >
@@ -29,10 +29,21 @@
           <a [routerLink]="['/skill/quiz', rowData.id]" pButton pRipple type="button" icon="pi pi-eye" class="p-button-info mx-2"  ></a>
         </ng-template>
       </app-table>
-      </ng-container>
-      <ng-container *ngIf="totalItems$|async as totalItems " >
-        <div>Showing {{first}} to entries of {{totalItems}}</div>
-        <p-paginator *ngIf="pagination$ | async as pagination"  (onPageChange)="onPageChange($event)" [first]="first" [rows]="pagination.rows" [totalRecords]="totalItems" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+        <ng-container *ngIf="totalItems$ | async as totalItems">
+          <div class="grid">
+            <div class="col-2 flex align-items-center justify-content-center ">
+              <span>{{ totalItems }} items total</span>
+            </div>
+            <p-paginator class="col-10 "
+                         *ngIf="pagination$ | async as pagination"
+                         (onPageChange)="onPageChange($event)"
+                         [first]="first"
+                         [rows]="pagination.rows"
+                         [totalRecords]="totalItems"
+                         [rowsPerPageOptions]="[10, 20, 30]"
+            ></p-paginator>
+          </div>
+        </ng-container>
       </ng-container>
     </div>
     </div>

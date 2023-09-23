@@ -18,32 +18,70 @@ import {DeleteQuizComponent} from './delete-quiz/delete-quiz.component';
 import {InputTextModule} from "primeng/inputtext";
 import {ReactiveFormsModule} from "@angular/forms";
 import { AddQuizComponent } from './add-quiz/add-quiz.component';
-import { UpdataQuizComponent } from './updata-quiz/updata-quiz.component';
+import { UpdateQuizComponent } from './update-quiz/update-quiz.component';
+import { QuizDetailsComponent } from './quiz-details/quiz-details.component';
+import { QuizQuestionComponent } from './quiz-question/quiz-question.component';
+import { QuizResponseComponent } from './quiz-response/quiz-response.component';
+import {CardModule} from "primeng/card";
+import {DividerModule} from "primeng/divider";
+import { AddQuestionComponent } from './add-question/add-question.component';
+import {CheckboxModule} from "primeng/checkbox";
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {MenuModule} from "primeng/menu";
+import {ToggleButtonModule} from "primeng/togglebutton";
+import {FileUploadModule} from "primeng/fileupload";
+import { QuestionComponent } from './question/question.component';
+import { DomainListComponent } from './domain-list/domain-list.component';
+import { ActivityListComponent } from './activity-list/activity-list.component';
+import { AddActivityComponent } from './add-activity/add-activity.component';
+import { UpdateActivityComponent } from './update-activity/update-activity.component';
+import { UpdateDomainComponent } from './update-domain/update-domain.component';
+import { AddDomainComponent } from './add-domain/add-domain.component';
+import { AddFormComponent } from './add-form/add-form.component';
+import { DeleteActivityComponent } from './delete-activity/delete-activity.component';
+import { DeleteDomainComponent } from './delete-domain/delete-domain.component';
 
 
 @NgModule({
-  declarations: [
-    SkillListComponent,
-    AddSkillComponent,
-    UpdateSkillComponent,
-    DeleteSkillComponent,
-    QuizListComponent,
-    DeleteQuizComponent,
-    AddQuizComponent,
-    UpdataQuizComponent
-  ],
-  imports: [
-    CommonModule,
-    SkillRoutingModule,
-    SharedModule,
-    PaginatorModule,
-    ToolbarModule,
-    ButtonModule,
-    RippleModule,
-    DialogModule,
-    ConfirmDialogModule,
-    InputTextModule, ReactiveFormsModule
-  ]
+    declarations: [
+        SkillListComponent,
+        AddSkillComponent,
+        UpdateSkillComponent,
+        DeleteSkillComponent,
+        QuizListComponent,
+        DeleteQuizComponent,
+        AddQuizComponent,
+        UpdateQuizComponent,
+        QuizDetailsComponent,
+        QuizQuestionComponent,
+        QuizResponseComponent,
+        AddQuestionComponent,
+        QuestionComponent,
+        DomainListComponent,
+        ActivityListComponent,
+        AddActivityComponent,
+        UpdateActivityComponent,
+        UpdateDomainComponent,
+        AddDomainComponent,
+        AddFormComponent,
+        DeleteActivityComponent,
+        DeleteDomainComponent
+    ],
+    exports: [
+        DeleteDomainComponent
+    ],
+    imports: [
+        CommonModule,
+        SkillRoutingModule,
+        SharedModule,
+        PaginatorModule,
+        ToolbarModule,
+        ButtonModule,
+        RippleModule,
+        DialogModule,
+        ConfirmDialogModule,
+        InputTextModule, ReactiveFormsModule, CardModule, DividerModule, CheckboxModule, InputTextareaModule, MenuModule, ToggleButtonModule, FileUploadModule
+    ]
 })
 export class SkillModule {
 }

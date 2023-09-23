@@ -41,7 +41,7 @@ export class AddTaskComponent {
     }
     if (this.form?.form.valid) {
       this.taskService.saveTask(this.form?.form.value).pipe(
-        tap((skill) => {
+        tap((task) => {
             this.notificationService.showSuccess('Task added successfully', 'Success');
             this.closeModal();
 

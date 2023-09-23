@@ -10,4 +10,5 @@ export const SkillForm: FormField[] = [
         validators: [Validators.required],
         placeholder: 'Enter Skill Description'
     },
+
 ]
