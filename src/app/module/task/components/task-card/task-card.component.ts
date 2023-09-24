@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Task} from "../../../../core/models/Task";
 import {TaskService} from "../../../../core/service/TaskService";
 import {tap} from "rxjs";
@@ -11,6 +11,11 @@ import {NotificationService} from "../../../shared/notification.service";
 })
 export class TaskCardComponent {
   @Input() task!:Task;
+  @Output() taskEditEventEmitter:EventEmitter<Task> = new EventEmitter<Task>()
+  emitToTaskPage(task:Task){
+    console.log('gogogog')
+this.taskEditEventEmitter.emit(task)
+  }
   constructor(private taskService:TaskService,private notificationService:NotificationService) {
 
   }

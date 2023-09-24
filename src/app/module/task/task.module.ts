@@ -17,6 +17,7 @@ import { AddSprintComponent } from './components/add-sprint/add-sprint.component
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SkillModule} from "../skill/skill.module";
+import { EditSprintComponent } from './components/edit-sprint/edit-sprint.component';
 
 
 
@@ -26,7 +27,8 @@ import {SkillModule} from "../skill/skill.module";
     TaskCardComponent,
     AddTaskComponent,
     EditTaskComponent,
-    AddSprintComponent
+    AddSprintComponent,
+    EditSprintComponent
   ],
   imports: [
     CommonModule,
