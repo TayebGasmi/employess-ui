@@ -16,7 +16,7 @@
 
   <div #topbarmenu [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}"
        class="layout-topbar-menu">
-    <button class="p-link layout-topbar-button">
+    <button [routerLink]="['profile']" class="p-link layout-topbar-button">
       <i class="pi pi-user"></i>
       <span>Profile</span>
     </button>

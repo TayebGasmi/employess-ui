@@ -54,4 +54,7 @@ export class SkillService {
   deleteSkills(skills: Skill[]): Observable<void> {
     return this.http.put<void>(`${this.baseUrl}/delete`, skills);
   }
+  addWithDomainAndActivity(skill: Skill, domainId: number, activityId: number): Observable<Skill> {
+    return this.http.post<Skill>(`${this.baseUrl}/${domainId}/${activityId}`, skill);
+  }
 }

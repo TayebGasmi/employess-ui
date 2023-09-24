@@ -12,10 +12,15 @@ import {initializeKeycloak} from "./init/keycloak-init.factory";
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthInterceptor} from "./module/auth.interceptor";
+import { ProfileComponent } from './profile/profile.component';
+import {HomeComponent} from "./home/home.component";
+import {UsersModule} from "./module/users/users.module";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProfileComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +29,8 @@ import {AuthInterceptor} from "./module/auth.interceptor";
     SharedModule,
     ToastModule,
     TaskModule,
-    KeycloakAngularModule
+    KeycloakAngularModule,
+    UsersModule
   ],
   providers: [MessageService,
     {

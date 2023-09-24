@@ -1,0 +1,55 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card px-6 py-6 min-h">
+      <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+          <div class="my-2">
+            <app-add-form [service]="activityService" [fields]="JobForm" [title]="'add Job '"></app-add-form>
+            <ng-container *ngTemplateOutlet="deleteALL"></ng-container>
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+          <button (click)="exportExcel()" class="p-button-help" icon="pi pi-upload" label="Export" pButton
+                  pRipple></button>
+        </ng-template>
+      </p-toolbar>
+
+      <ng-container *ngIf="data$ | async as quizzes">
+        <app-table #table [cols]="cols" [dataSource]="quizzes.content" [headers]="skillHeaders"
+                   [title]="'Manage Job'">
+          <ng-template #search>
+          <span class="p-input-icon-left">
+    <i class="pi pi-search"></i>
+    <input [formControl]="name" class="w-full sm:w-auto" pInputText placeholder="Search..." type="text"/>
+</span>
+          </ng-template>
+          <ng-template #actions let-rowData>
+
+          </ng-template>
+        </app-table>
+      </ng-container>
+      <ng-container *ngIf="totalItems$ | async as totalItems">
+        <div class="grid">
+          <div class="col-2 flex align-items-center justify-content-center ">
+            <span>{{ totalItems }} items total</span>
+          </div>
+          <p-paginator (onPageChange)="onPageChange($event)"
+                       *ngIf="pagination$ | async as pagination"
+                       [first]="first"
+                       [rowsPerPageOptions]="[10, 20, 30]"
+                       [rows]="pagination.rows"
+                       [totalRecords]="totalItems"
+                       class="col-10 "
+          ></p-paginator>
+        </div>
+      </ng-container>
+
+    </div>
+  </div>
+</div>
+<ng-template #deleteALL>
+  <p-confirmDialog [key]="'deleteAll'" [style]="{width: '50vw'} ">
+  </p-confirmDialog>
+  <button (click)="confirm($event)" class="p-button-danger" icon="pi pi-trash" label="Delete" pButton pRipple></button>
+</ng-template>

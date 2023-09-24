@@ -10,12 +10,13 @@ export function initializeKeycloak(
         realm: 'skill',
         clientId: 'skill',
       },
+      loadUserProfileAtStartUp: true,
       initOptions: {
+
         onLoad: 'login-required',
       }
       ,shouldUpdateToken: request =>
       {
-        console.log('shouldUpdateToken', request);
         return true;
       }
     });

@@ -20,6 +20,7 @@ export interface IBaseService<T, I> {
   updateData(t?: T | null): void
 
   findByName(name: string, page: number, size: number): Observable<Page<T>>;
+  getAll(): Observable<T[]>
 
 
 }

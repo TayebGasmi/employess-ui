@@ -1,0 +1,19 @@
+<ng-container *ngIf="userProfile$ | async as profile">
+  <div class="p-grid">
+    <div class="p-col-12">
+      <div class="card min-h">
+        <!-- Profile Information -->
+        <h2>User Profile</h2>
+        {{ profile | json}}
+        <div>
+          <p><strong>Name:</strong> {{ profile?.name }}</p>
+          <p><strong>Email:</strong> {{ profile?.email }}</p>
+          <p><strong>Preferred Username:</strong> {{ profile?.preferred_username }}</p>
+          <p><strong>Given Name:</strong> {{ profile?.given_name }}</p>
+          <p><strong>Family Name:</strong> {{ profile?.family_name }}</p>
+          <p><strong>Email Verified:</strong> {{ profile?.email_verified ? 'Yes' : 'No' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,50 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card px-6 py-6 min-h">
+      <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+          <div class="my-2">
+            <ng-container *ngIf="jobs$ |async as jobs">
+              <app-add-user [jobs]="jobs" ></app-add-user>
+            </ng-container>
+
+          </div>
+        </ng-template>
+        <ng-template pTemplate="right">
+          <button (click)="exportExcel()" class="p-button-help" icon="pi pi-upload" label="Export" pButton
+                  pRipple></button>
+
+        </ng-template>
+      </p-toolbar>
+
+      <ng-container *ngIf="users$ | async as users">
+        <app-table #table [cols]="cols" [dataSource]="users" [headers]="userHeaders"
+                     [title]="'Manage Users'">
+          <ng-template #search>
+          <span class="p-input-icon-left">
+    <i class="pi pi-search"></i>
+    <input [formControl]="name" class="w-full sm:w-auto" pInputText placeholder="Search..." type="text"/>
+</span>
+          </ng-template>
+          <ng-template #actions let-rowData>
+            <app-update-user [user]="rowData"></app-update-user>
+            <app-delete-user [id]="rowData.id"></app-delete-user>
+          </ng-template>
+        </app-table>
+        <ng-container *ngIf="totalItems$ | async as totalItems">
+          <div class="grid">
+            <p-paginator (onPageChange)="onPageChange($event)"
+                         *ngIf="pagination$ | async as pagination"
+                         [first]="first"
+                         [rowsPerPageOptions]="[10, 20, 30]"
+                         [rows]="pagination.rows"
+                         [totalRecords]="totalItems"
+                         class="col-10 "
+            ></p-paginator>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>
+

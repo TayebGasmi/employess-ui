@@ -30,7 +30,22 @@
               *ngTemplateOutlet="header.template; context: { $implicit: element }"
             ></ng-container>
           </ng-container>
-          <ng-template #defaultCell>{{  element[header.dataKey] }}</ng-template>
+          <ng-template #defaultCell>
+            <ng-container *ngIf="header.object">
+              <ng-container *ngIf="header.objectKey" >
+               <ng-container *ngIf="element[header.objectKey]">
+                 {{element[header.objectKey][header.dataKey]}}
+              </ng-container>
+                <ng-container *ngIf="!element[header.objectKey]">
+                  NV
+                </ng-container>
+            </ng-container>
+
+            </ng-container>
+            <ng-container *ngIf="!header.object">
+              {{element[header.dataKey]}}
+            </ng-container>
+            </ng-template>
         </td>
         <td *ngIf="actions">
           <ng-container *ngTemplateOutlet="actions; context: { $implicit: element }"></ng-container>

@@ -5,7 +5,7 @@ import {
   BehaviorSubject,
   combineLatest,
   debounceTime,
-  distinctUntilChanged,
+  distinctUntilChanged, map,
   Observable,
   startWith,
   switchMap,
@@ -16,6 +16,8 @@ import {Skill} from "../../../core/models/Skill";
 import {TableColumnHeader} from "../../../core/models/tableColumnHeader";
 import {FormControl} from "@angular/forms";
 import {ConfirmationService, ConfirmEventType} from "primeng/api";
+import {DomainService} from "../../../core/service/domain.service";
+import {ActivityService} from "../../../core/service/activity.service";
 
 
 interface Pagination {
@@ -37,6 +39,18 @@ export class SkillListComponent {
     {
       dataKey: 'description',
     },
+    {
+      displayName: 'Domain',
+      dataKey: 'name',
+      object: true,
+      objectKey: 'domain'
+    },
+    {
+      displayName: 'Activity',
+      dataKey: 'name',
+      object: true,
+      objectKey: 'activity'
+    }
   ];
   pagination$: BehaviorSubject<Pagination> = new BehaviorSubject<Pagination>({rows: 10, page: 0});
   name = new FormControl('');
@@ -45,6 +59,29 @@ export class SkillListComponent {
     distinctUntilChanged(),
     startWith(''),
   );
+  activities$=this.activityService.getAll()
+  domains$=this.domainService.getAll()
+  activitiesDomain$=combineLatest([
+    this.activities$,
+    this.domains$
+  ]).pipe(
+    map(([activities,domains])=>{return ({activities:activities.map(
+        activities=>{
+          return  {
+            label:activities.name, value
+              :
+            activities.id
+          }
+        }
+      ),domains:domains.map(domain=>{
+        return  {
+          label:domain.name,
+          value
+            :
+          domain.id
+        }
+      })})})
+  )
   totalItems$: BehaviorSubject<number> = new BehaviorSubject(100);
   skills$: Observable<Page<Skill>> = combineLatest([
     this.pagination$,
@@ -68,7 +105,7 @@ export class SkillListComponent {
     {field: 'description', header: 'Description'},
   ];
 
-  constructor(private notificationService: NotificationService, private skillService: SkillService, private confirmationService: ConfirmationService) {
+  constructor(private notificationService: NotificationService, private skillService: SkillService, private confirmationService: ConfirmationService,private domainService:DomainService,private activityService:ActivityService) {
 
   }
 
@@ -89,7 +126,7 @@ export class SkillListComponent {
     });
   }
 
-  delete(rowData: any): void | undefined {
+  delete(rowData: any): void  {
     this.skillService.deleteSkillById(rowData.id).subscribe(value => {
       this.notificationService.showInfo("Deleted successfully", "Delete")
       this.skillService.updateSkills();

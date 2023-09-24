@@ -13,7 +13,8 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log('Headers:', request.headers.get('Authorization'));
     return next.handle(request);
   }
 }
+
+

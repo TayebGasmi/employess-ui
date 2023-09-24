@@ -1,0 +1,36 @@
+.min-h{
+  height:calc(100vh - 9rem);
+}
+.items{
+  width: 100%;
+  text-align: center;
+}
+.item{
+  height: 200px;
+  width: 200px;
+  border: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color:#E7E7E7;
+  display: inline-block;
+  margin-right: 100px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: white;
+  cursor: pointer;
+}
+.header{
+  margin-bottom: 50px;
+}
+.header h1{
+  font-weight: bold;
+}
+.item i{
+  height: 80px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 80px;
+}
+.item p{
+  font-weight: bold;
+}

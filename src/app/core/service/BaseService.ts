@@ -4,6 +4,9 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {Page} from "../models/Page";
 
 export class BaseService<T, I> implements IBaseService<T, I> {
+  getAll(): Observable<T[]> {
+    return this.httpClient.get<T[]>(`${this.url}/all`)
+  }
   dataSubject$: BehaviorSubject<T | null> = new BehaviorSubject<T | null>(null);
   data$: Observable<T | null> = this.dataSubject$.asObservable();
 
@@ -19,6 +22,7 @@ export class BaseService<T, I> implements IBaseService<T, I> {
         size: size.toString()
       }
     });
+
   }
 
   updateById(t: T, id: I): Observable<T> {

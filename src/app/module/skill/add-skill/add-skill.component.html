@@ -1,8 +1,8 @@
-<button pButton type="button" icon="pi pi-plus" class="p-button-success mr-2" (click)="openModal()" >
-  New
-</button>
-<p-dialog  [(visible)]="showModal" [style]="{ width: '50vw' }" [header]="'add new skill'" [modal]="true" class="p-fluid">
-  <app-form [fields]="SkillForm">
+
+  <button pButton type="button" icon="pi pi-plus" class="p-button-success mr-2" (click)="openModal()" >
+    New
+  </button><p-dialog  [(visible)]="showModal" [style]="{ width: '50vw' }" [header]="'add new skill'" [modal]="true" class="p-fluid">
+  <app-form [fields]="fields">
   </app-form>
   <ng-template pTemplate="footer">
     <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="closeModal()"></button>

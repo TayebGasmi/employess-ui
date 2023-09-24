@@ -24,21 +24,18 @@ export class AppMenuComponent implements OnInit {
         label: 'users',
         items: [
           {label: 'Users', icon: 'pi pi-fw pi-users', routerLink: ['/user']},
-          {label: 'Dashboard', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/dashboard/user']},
         ]
       },
       {
         label: 'formation',
         items: [
           {label: 'Formation', icon: 'pi pi-fw pi-book', routerLink: ['/formation']},
-          {label: 'Dashboard', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/dashboard/formation']},
         ]
       },
       {
         label: 'task',
         items: [
-          {label: 'Task', icon: 'pi pi-fw pi-calendar', routerLink: ['/task']},
-          {label: 'Dashboard', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/dashboard/task']},
+          {label: 'Task', icon: 'pi pi-fw pi-check', routerLink: ['/task']},
         ]
       }
       ,
@@ -46,15 +43,27 @@ export class AppMenuComponent implements OnInit {
         label: 'performance',
         items: [
           {label: 'Skills', icon: 'pi pi-fw pi-star', routerLink: ['/skill']},
-          {label: 'Dashboard', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/dashboard/skills']},
           {
-            label: 'Activity', icon: 'pi pi-fw pi-calendar', routerLink: ['skill/activity']
+            label: 'Activity', icon: 'pi pi-fw pi-calendar-plus', routerLink: ['skill/activity']
           },
           {
-            label: 'Domain', icon: 'pi pi-fw pi-calendar', routerLink: ['skill/domain']
+            label: 'Domain', icon: 'pi pi-fw pi-globe', routerLink: ['skill/domain']
           }
         ]
 
+      }
+,
+      {
+        label: 'job',
+        items: [
+          {label: 'Job', icon: 'pi pi-fw pi-briefcase', routerLink: ['/job']},
+        ]
+      },
+      {
+        label: 'dashboard',
+        items: [
+          {label: 'Dashboard', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/dashboard']},
+        ]
       }
 
 
