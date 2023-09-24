@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {FormComponent} from "../../../shared/form/form.component";
 import {NotificationService} from "../../../shared/notification.service";
 import {TaskService} from "../../../../core/service/TaskService";
@@ -13,6 +13,8 @@ import {TaskFrom} from "../../../../core/models/TaskFrom";
 export class EditTaskComponent {
   @Input()
   task?: Task;
+  @Output() editTaskEventEmitter:EventEmitter<Task>= new EventEmitter<Task>();
+
   @ViewChild(FormComponent) form?: FormComponent;
   constructor(private  notificationService: NotificationService, private taskService: TaskService) {
   }
@@ -29,8 +31,11 @@ openModal(){
       this.notificationService.showError('Form is invalid', 'Error');
       return;
     }
-    this.taskService.updateTask(this.form?.form.value,this.task?.id ).subscribe((skill) => {
+    this.taskService.updateTask(this.form?.form.value,this.task?.id ).subscribe((task) => {
+
       this.notificationService.showSuccess('Task updated successfully', 'Success');
+      this.taskService.updateData();
+    //  this.editTaskEventEmitter.emit(this.form?.form.value);
       this.closeModal();
 
     })

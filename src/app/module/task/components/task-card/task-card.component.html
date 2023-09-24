@@ -10,7 +10,8 @@
     <div class="flex flex-row flex-wrap card-container blue-container">
       <!--<app-delete-domain></app-delete-domain>-->
       <i class="pi pi-trash product-category-icon pl-1" (click)="deleteTask(task.id)" ></i>
-    <app-edit-task  [task]="task"> </app-edit-task>
+    <app-edit-task  [task]="task"
+                     (editTaskEventEmitter)="emitToTaskPage($event)"> </app-edit-task>
       <i class="pi pi-copy product-category-icon pl-1" (click)="duplicateTask(task.id)" ></i>
     </div>
     <p-tag [value]="task.taskStatus" severity="info" class="p-1"></p-tag>
