@@ -1,1 +1,9 @@
-<p>update-my-skill works!</p>
+<button pButton type="button" icon="pi pi-check" class="p-button-success ml-2" (click)="openModal()" >
+</button><p-dialog  [(visible)]="showModal" [style]="{ width: '50vw' ,height: '500px'}" [header]="'add new skill'" [modal]="true" class="p-fluid">
+  <app-form [fields]="UserSkillFrom">
+  </app-form>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="closeModal()"></button>
+    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+  </ng-template>
+</p-dialog>

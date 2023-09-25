@@ -20,6 +20,7 @@ export class UserSkillService {
   deleteSkillFromUser(Id:number):Observable<void>{
     return this.http.delete<void>(this.baseUrl+"/"+Id)
   }
+
   dataSubject$: BehaviorSubject<any | null> = new BehaviorSubject<any | null>(null);
   data$: Observable<any | null> = this.dataSubject$.asObservable();
   updateData(t: any | null = null): void {

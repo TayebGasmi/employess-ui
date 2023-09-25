@@ -20,7 +20,7 @@
                    [title]="'Manage Skills'">
 
           <ng-template #actions let-rowData>
-
+               <app-delete-my-skill [id]="rowData.id"></app-delete-my-skill>
           </ng-template>
         </app-table>
         <ng-container *ngIf="totalItems$ | async as totalItems">
