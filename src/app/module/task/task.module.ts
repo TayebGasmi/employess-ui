@@ -21,6 +21,8 @@ import { EditSprintComponent } from './components/edit-sprint/edit-sprint.compon
 import { TaskDashboardPageComponent } from './components/task-dashboard-page/task-dashboard-page.component';
 import {MenuModule} from "primeng/menu";
 import {ChartModule} from "primeng/chart";
+import { TaskPieChartComponent } from './components/task-pie-chart/task-pie-chart.component';
+import { StackedBarChartComponent } from './components/stacked-bar-chart/stacked-bar-chart.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import {ChartModule} from "primeng/chart";
     EditTaskComponent,
     AddSprintComponent,
     EditSprintComponent,
-    TaskDashboardPageComponent
+    TaskDashboardPageComponent,
+    TaskPieChartComponent,
+    StackedBarChartComponent
   ],
   imports: [
     CommonModule,
