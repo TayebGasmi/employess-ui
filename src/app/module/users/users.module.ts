@@ -15,6 +15,8 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
 import {DialogModule} from "primeng/dialog";
 import { DeleteUserComponent } from './delete-user/delete-user.component';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import {ChartModule} from "primeng/chart";
 
 
 @NgModule({
@@ -22,20 +24,22 @@ import { DeleteUserComponent } from './delete-user/delete-user.component';
     UserListComponent,
     AddUserComponent,
     UpdateUserComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    UserDashboardComponent
   ],
-  imports: [
-    CommonModule,
-    UsersRoutingModule,
-    ButtonModule,
-    ConfirmDialogModule,
-    InputTextModule,
-    PaginatorModule,
-    ReactiveFormsModule,
-    RippleModule,
-    SharedModule,
-    ToolbarModule,
-    DialogModule,
-  ]
+    imports: [
+        CommonModule,
+        UsersRoutingModule,
+        ButtonModule,
+        ConfirmDialogModule,
+        InputTextModule,
+        PaginatorModule,
+        ReactiveFormsModule,
+        RippleModule,
+        SharedModule,
+        ToolbarModule,
+        DialogModule,
+        ChartModule,
+    ]
 })
 export class UsersModule { }

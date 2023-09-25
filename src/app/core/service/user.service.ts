@@ -16,6 +16,9 @@ export class UserService {
   getAll (first:number=0,max:number=10,search:string="") : Observable<User[]>{
     return this.http.get<User[]>(this.API_URL+"?first="+first+"&max="+max+"&search="+search);
   }
+  findAll() : Observable<User[]>{
+    return this.http.get<User[]>(this.API_URL);
+  }
   delete(id:string){
     return this.http.delete(this.API_URL+"/"+id);
   }

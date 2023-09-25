@@ -9,6 +9,7 @@ import {ActivityListComponent} from "./activity-list/activity-list.component";
 import {DomainListComponent} from "./domain-list/domain-list.component";
 import {AuthGuard} from "../../guard/auth.guard";
 import {MySkillComponent} from "./my-skill/my-skill.component";
+import {SkillDashComponent} from "./skill-dash/skill-dash.component";
 
 const routes: Routes = [
 
@@ -51,6 +52,9 @@ const routes: Routes = [
       ,{
       path: 'my',
         component:MySkillComponent
+      },{
+      path: 'dash',
+        component:SkillDashComponent
       }
     ],
 
