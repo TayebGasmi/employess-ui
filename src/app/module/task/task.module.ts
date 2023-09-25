@@ -16,6 +16,11 @@ import {EditTaskComponent} from './components/edit-task/edit-task.component';
 import {AddSprintComponent} from './components/add-sprint/add-sprint.component';
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {SkillModule} from "../skill/skill.module";
+import { EditSprintComponent } from './components/edit-sprint/edit-sprint.component';
+import { TaskDashboardPageComponent } from './components/task-dashboard-page/task-dashboard-page.component';
+import {MenuModule} from "primeng/menu";
+import {ChartModule} from "primeng/chart";
 
 
 @NgModule({
@@ -24,7 +29,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     TaskCardComponent,
     AddTaskComponent,
     EditTaskComponent,
-    AddSprintComponent
+    AddSprintComponent,
+    EditSprintComponent,
+    TaskDashboardPageComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +46,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     SharedModule,
     DropdownModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SkillModule,
+    MenuModule,
+    ChartModule
   ]
 })
 export class TaskModule {

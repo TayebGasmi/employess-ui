@@ -1,6 +1,6 @@
 <i class="pi pi-pencil product-category-icon pl-1" (click)="openModel()" ></i>
 <p-dialog  [(visible)]="showModal" [style]="{ width: '50vw' }" [header]="'Edit Task'" [modal]="true" class="p-fluid">
-  <app-form [fields]="TaskForm" [formData]="task">
+  <app-form [fields]="sprintForm" [formData]="sprint">
   </app-form>
   <ng-template pTemplate="footer">
     <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="closeModal()"></button>

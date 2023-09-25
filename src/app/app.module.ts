@@ -12,7 +12,7 @@ import {initializeKeycloak} from "./init/keycloak-init.factory";
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthInterceptor} from "./module/auth.interceptor";
-import { ProfileComponent } from './profile/profile.component';
+import {ProfileComponent} from './profile/profile.component';
 import {HomeComponent} from "./home/home.component";
 import {UsersModule} from "./module/users/users.module";
 import {DividerModule} from "primeng/divider";
@@ -20,6 +20,7 @@ import {PanelModule} from "primeng/panel";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
 import {ToolbarModule} from "primeng/toolbar";
+import {GraphQLModule} from "./graphql.module";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,8 @@ import {ToolbarModule} from "primeng/toolbar";
     AppLayoutModule,
     SharedModule,
     ToastModule,
+    TaskModule,
+    GraphQLModule
     TaskModule,
     KeycloakAngularModule,
     UsersModule,
