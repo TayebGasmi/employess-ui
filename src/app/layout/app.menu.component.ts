@@ -38,7 +38,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'task',
                   items: [
                       { label: 'Task', icon: 'pi pi-fw pi-calendar', routerLink: ['/task'] },
-                      { label: 'Dashboard', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/dashboard/task'] },
+                      { label: 'Dashboard', icon: 'pi pi-fw pi-chart-bar', routerLink: ['task/dash'] },
                   ]
              }
              ,

@@ -8,6 +8,7 @@ import {SharedModule} from "./module/shared/shared.module";
 import {ToastModule} from "primeng/toast";
 import {MessageService} from "primeng/api";
 import {TaskModule} from "./module/task/task.module";
+import {GraphQLModule} from "./graphql.module";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {TaskModule} from "./module/task/task.module";
     AppLayoutModule,
     SharedModule,
     ToastModule,
-    TaskModule
+    TaskModule,
+    GraphQLModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
