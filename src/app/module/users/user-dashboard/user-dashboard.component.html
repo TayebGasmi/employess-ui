@@ -1,0 +1,92 @@
+<div class="grid">
+  <div class="col-12 lg:col-6 xl:col-3">
+    <div class="card mb-0">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">Total users</span>
+          <ng-container *ngIf="userData$ | async as userList">
+            <div class="text-900 font-medium text-xl">{{userList.length}}</div>
+          </ng-container>
+        </div>
+        <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+          <i class="pi pi-list text-blue-500 text-xl"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 lg:col-6 xl:col-3">
+    <div class="card mb-0">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">Total Males</span>
+          <ng-container  >
+            <div class="text-900 font-medium text-xl">{{maleCount}}</div>
+          </ng-container>
+        </div>
+        <div class="flex align-items-center justify-content-center bg-orange-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+          <i class="pi pi-check text-orange-500 text-xl"></i>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-12 lg:col-6 xl:col-3">
+    <div class="card mb-0">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">Total females</span>
+          <ng-container >
+            <div class="text-900 font-medium text-xl">{{femaleCount}}</div>
+          </ng-container>
+        </div>
+        <div class="flex align-items-center justify-content-center bg-cyan-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+          <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="col-12 xl:col-6">
+
+
+      <div class="card">
+        <h5>users per gender</h5>
+        <ng-container >
+        <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+        </ng-container>
+      </div>
+
+
+  </div>
+
+  <div class="col-12 xl:col-6">
+
+
+      <div class="card">
+        <h5>users per seniority</h5>
+        <ng-container >
+          <p-chart type="bar" [data]="basicData2" [options]="basicOptions2"></p-chart>
+        </ng-container>
+      </div>
+
+
+    </div>
+
+
+
+  </div>
+
+<!--<ng-container *ngIf="userData$ |async as data ">
+  {{data|json}}
+</ng-container>-->
