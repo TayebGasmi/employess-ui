@@ -1,19 +1,89 @@
 <ng-container *ngIf="userProfile$ | async as profile">
-  <div class="p-grid">
-    <div class="p-col-12">
-      <div class="card min-h">
-        <!-- Profile Information -->
-        <h2>User Profile</h2>
-        {{ profile | json}}
+  <div class="card min-h">
+    <div class="card" >
+
+        <p-toolbar styleClass="mb-4">
+          <ng-template pTemplate="left">
+            <div class="my-2">
+              <div class="text-primary font-semibold text-xl text-center">Profile</div>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="right">
+
+             <!-- "Key" icon for Reset Password -->
+          </ng-template>
+        </p-toolbar>
         <div>
-          <p><strong>Name:</strong> {{ profile?.name }}</p>
-          <p><strong>Email:</strong> {{ profile?.email }}</p>
-          <p><strong>Preferred Username:</strong> {{ profile?.preferred_username }}</p>
-          <p><strong>Given Name:</strong> {{ profile?.given_name }}</p>
-          <p><strong>Family Name:</strong> {{ profile?.family_name }}</p>
-          <p><strong>Email Verified:</strong> {{ profile?.email_verified ? 'Yes' : 'No' }}</p>
+
+
         </div>
+
+
+      <p-divider [align]="'center'">
+        <div class="flex items-center">
+          <i class="pi pi-user mr-2"></i>
+          <b>Name</b>
+        </div>
+      </p-divider>
+      <div>
+        <h2 style="text-align: center;">{{ profile.name }}</h2>
       </div>
+      <p-divider [align]="'center'">
+        <div class="flex items-center">
+          <i class="pi pi-envelope mr-2"></i>
+          <b>Email</b>
+        </div>
+      </p-divider>
+      <div>
+        <h2 style="text-align: center;">{{ profile.email }}</h2>
+      </div>
+      <p-divider [align]="'center'">
+        <div class="flex items-center">
+          <i class="pi pi-briefcase mr-2"></i>
+          <b>Job</b>
+        </div>
+      </p-divider>
+      <div>
+        <h2 style="text-align: center;">{{ profile.job }}</h2>
+      </div>
+      <p-divider [align]="'center'">
+        <div class="flex items-center">
+          <i class="pi pi-star mr-2"></i>
+          <b>Grade</b>
+        </div>
+      </p-divider>
+      <div>
+        <h2 style="text-align: center;">{{ profile.grade }}</h2>
+      </div>
+      <p-divider [align]="'center'">
+        <div class="flex items-center">
+          <i class="fas fa-venus-mars mr-2"></i>
+          <b>Gender</b>
+        </div>
+      </p-divider>
+      <div>
+        <h2 style="text-align: center;">{{ profile.gender }}</h2>
+      </div>
+      <p-divider [align]="'center'">
+        <div class="flex items-center">
+          <i class="pi pi-calendar mr-2"></i>
+          <b>Birth Date</b>
+        </div>
+      </p-divider>
+      <div>
+        <h2 style="text-align: center;">{{ profile.birthdate }}</h2>
+      </div>
+      <p-divider [align]="'center'">
+        <div class="flex items-center">
+          <i class="pi pi-phone mr-2"></i>
+          <b>Phone</b>
+        </div>
+      </p-divider>
+      <div>
+        <h2 style="text-align: center;">{{ profile.phone }}</h2>
+      </div>
+
     </div>
   </div>
 </ng-container>

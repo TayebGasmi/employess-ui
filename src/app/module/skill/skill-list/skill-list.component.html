@@ -23,16 +23,24 @@
         <app-table #table [cols]="cols" [dataSource]="skills.content" [headers]="skillHeaders"
                    [title]="'Manage Skills'">
           <ng-template #search>
-          <span class="p-input-icon-left">
-    <i class="pi pi-search"></i>
-    <input [formControl]="name" class="w-full sm:w-auto" pInputText placeholder="Search..." type="text"/>
-</span>
+            <div class="p-grid p-justify-between">
+
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input [formControl]="name" class="w-full sm:w-auto" pInputText placeholder="Search..." type="text" class="mr-2"/>
+      </span>
+              <ng-container *ngIf="activitiesDomainOption$ | async as activitiesDomain " >
+                  <p-dropdown class="mr-2" [options]="activitiesDomain.domains" [formControl]="domain"   placeholder="Find by Domain" [showClear]="true"></p-dropdown>
+                  <p-dropdown class="mr-2" [options]="activitiesDomain.activities"  [formControl]="activity" [showClear]="true" placeholder="Find by Activity"></p-dropdown>
+              </ng-container>
+
+            </div>
           </ng-template>
+
           <ng-template #actions let-rowData>
             <app-update-skill [skill]="rowData"></app-update-skill>
             <app-delete-skill [id]="rowData.id"></app-delete-skill>
-            <a [routerLink]="['/skill/quiz', rowData.id]" class="p-button-info mx-2" icon="pi pi-eye" pButton pRipple
-               type="button"></a>
+            <app-assign-skill [SkillId]="rowData.id" ></app-assign-skill>
           </ng-template>
         </app-table>
         <ng-container *ngIf="totalItems$ | async as totalItems">

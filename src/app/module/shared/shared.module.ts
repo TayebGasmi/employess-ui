@@ -24,12 +24,14 @@ import {MessageModule} from "primeng/message";
 import {DialogModule} from "primeng/dialog";
 import {TableModule} from "primeng/table";
 import {AddFormComponent} from "./add-form/add-form.component";
+import { UpdateFormComponent } from './update-form/update-form.component';
 
 @NgModule({
   declarations: [
     TableComponent,
     FormComponent,
     AddFormComponent,
+    UpdateFormComponent,
   ],
   imports: [
     CommonModule,
@@ -56,7 +58,8 @@ import {AddFormComponent} from "./add-form/add-form.component";
   exports: [
     TableComponent,
     FormComponent,
-    AddFormComponent
+    AddFormComponent,
+    UpdateFormComponent,
 
   ],
   providers: [ConfirmationService]

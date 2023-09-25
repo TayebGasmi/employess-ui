@@ -27,12 +27,6 @@ export class AppMenuComponent implements OnInit {
         ]
       },
       {
-        label: 'formation',
-        items: [
-          {label: 'Formation', icon: 'pi pi-fw pi-book', routerLink: ['/formation']},
-        ]
-      },
-      {
         label: 'task',
         items: [
           {label: 'Task', icon: 'pi pi-fw pi-check', routerLink: ['/task']},
@@ -43,6 +37,7 @@ export class AppMenuComponent implements OnInit {
         label: 'performance',
         items: [
           {label: 'Skills', icon: 'pi pi-fw pi-star', routerLink: ['/skill']},
+          {label: 'My Skills', icon: 'pi pi-fw pi-star', routerLink: ['/skill/my']},
           {
             label: 'Activity', icon: 'pi pi-fw pi-calendar-plus', routerLink: ['skill/activity']
           },

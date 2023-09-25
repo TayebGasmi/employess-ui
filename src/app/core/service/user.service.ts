@@ -19,7 +19,7 @@ export class UserService {
   delete(id:string){
     return this.http.delete(this.API_URL+"/"+id);
   }
-  update(id:string,user:User){
+  update(id:string,user:any){
     return this.http.put(this.API_URL+"/"+id,user);
   }
   get(id:string){

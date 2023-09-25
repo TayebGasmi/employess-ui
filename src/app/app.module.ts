@@ -15,6 +15,11 @@ import {AuthInterceptor} from "./module/auth.interceptor";
 import { ProfileComponent } from './profile/profile.component';
 import {HomeComponent} from "./home/home.component";
 import {UsersModule} from "./module/users/users.module";
+import {DividerModule} from "primeng/divider";
+import {PanelModule} from "primeng/panel";
+import {ButtonModule} from "primeng/button";
+import {RippleModule} from "primeng/ripple";
+import {ToolbarModule} from "primeng/toolbar";
 
 @NgModule({
   declarations: [
@@ -30,7 +35,12 @@ import {UsersModule} from "./module/users/users.module";
     ToastModule,
     TaskModule,
     KeycloakAngularModule,
-    UsersModule
+    UsersModule,
+    DividerModule,
+    PanelModule,
+    ButtonModule,
+    RippleModule,
+    ToolbarModule
   ],
   providers: [MessageService,
     {

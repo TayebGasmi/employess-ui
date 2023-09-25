@@ -50,6 +50,24 @@ export class UserListComponent {
       displayName: 'Grade',
       object: true,
       objectKey: 'attributes'
+    },
+    {
+      dataKey: 'gender',
+      displayName:'Gender',
+      object: true,
+      objectKey: 'attributes'
+    },
+     {
+      dataKey: 'birthdate',
+      displayName:'Birthdate',
+      object: true,
+      objectKey: 'attributes'
+    },
+    {
+      dataKey: 'phone',
+      displayName:'Phone',
+      object: true,
+      objectKey: 'attributes'
     }
   ];
   pagination$: BehaviorSubject<Pagination> = new BehaviorSubject<Pagination>({rows: 10, page: 0});
@@ -84,6 +102,8 @@ export class UserListComponent {
     {field: 'enabled', header: 'Enabled'},
     {field: 'emailVerified', header: 'Email Verified'},
     {field: 'createdTimestamp', header: 'Created Timestamp'},
+    {field: 'gender',header: 'Gender'},
+    {field: 'birthdate',header: 'Birthdate'},
 
   ];
 

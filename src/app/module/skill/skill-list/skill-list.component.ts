@@ -54,13 +54,47 @@ export class SkillListComponent {
   ];
   pagination$: BehaviorSubject<Pagination> = new BehaviorSubject<Pagination>({rows: 10, page: 0});
   name = new FormControl('');
-  search$ = this.name.valueChanges.pipe(
+  search$:Observable<string|null> = this.name.valueChanges.pipe(
+    debounceTime(300),
+    distinctUntilChanged(),
+    startWith(''),
+  );
+  activity = new FormControl();
+  domain = new FormControl();
+  activity$:Observable<string|null> = this.activity.valueChanges.pipe(
+    debounceTime(300),
+    distinctUntilChanged(),
+    startWith(''),
+  );
+  domain$:Observable<string|null> = this.domain.valueChanges.pipe(
     debounceTime(300),
     distinctUntilChanged(),
     startWith(''),
   );
   activities$=this.activityService.getAll()
   domains$=this.domainService.getAll()
+  activitiesDomainOption$=combineLatest([
+    this.activities$,
+    this.domains$
+  ]).pipe(
+    map(([activities,domains])=>{return ({activities:activities.map(
+        activities=>{
+          return  {
+            label:activities.name, value
+              :
+            activities.name
+          }
+        }
+      ),domains:domains.map(domain=>{
+        return  {
+          label:domain.name,
+          value
+            :
+          domain.name
+        }
+      }
+    )})})
+  )
   activitiesDomain$=combineLatest([
     this.activities$,
     this.domains$
@@ -86,11 +120,13 @@ export class SkillListComponent {
   skills$: Observable<Page<Skill>> = combineLatest([
     this.pagination$,
     this.search$,
+    this.activity$,
+    this.domain$,
     this.updateSkills$,
   ]).pipe(
-    switchMap(([pagination, name]) => {
-      if (name) {
-        return this.skillService.searchSkills(name, pagination.page ?? 0, pagination.rows ?? 10);
+    switchMap(([pagination, name,activity,domain]) => {
+      if (name || activity || domain) {
+        return this.skillService.searchSkills(name  ,activity,domain, pagination.page ?? 0, pagination.rows ?? 10);
       }
 
       return this.skillService.getAllSkills(pagination.page ?? 0, pagination.rows ?? 10);

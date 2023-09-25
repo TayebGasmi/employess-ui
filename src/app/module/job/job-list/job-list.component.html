@@ -4,7 +4,7 @@
       <p-toolbar styleClass="mb-4">
         <ng-template pTemplate="left">
           <div class="my-2">
-            <app-add-form [service]="activityService" [fields]="JobForm" [title]="'add Job '"></app-add-form>
+            <app-add-form [service]="jobService" [fields]="JobForm" [title]="'add Job '"></app-add-form>
             <ng-container *ngTemplateOutlet="deleteALL"></ng-container>
           </div>
         </ng-template>
@@ -25,7 +25,8 @@
 </span>
           </ng-template>
           <ng-template #actions let-rowData>
-
+            <app-update-form [service]="jobService" [title]="'update job'" [fields]="JobForm" [data]="rowData"></app-update-form>
+            <app-delete-job [id]="rowData.id" ></app-delete-job>
           </ng-template>
         </app-table>
       </ng-container>

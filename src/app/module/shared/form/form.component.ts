@@ -23,7 +23,11 @@ export class FormComponent implements OnInit {
 
   initForm() {
     this.fields.forEach(field => {
-      const fieldValue = this.formData.hasOwnProperty(field.name) ? this.formData[field.name] : '';
+      let fieldValue = this.formData.hasOwnProperty(field.name) ? this.formData[field.name] : '';
+      if(field.type=="dropdown") {
+         fieldValue =fieldValue[0];
+      }
+
       const formControl = new FormControl(fieldValue, field.validators, field.asyncValidators);
       this.form.addControl(field.name, formControl);
     });
@@ -34,8 +38,6 @@ export class FormComponent implements OnInit {
     return control?.invalid && (control?.dirty || control?.touched);
   }
 
-  onSubmit() {
-    console.log(this.form.value);
-  }
+
 
 }

@@ -44,18 +44,27 @@ export class AddUserComponent implements OnInit{
   }
 
   save() {
+
     if (this.form?.form.invalid) {
       this.notificationService.showError('Form is invalid', 'Error');
       return;
     }
     if (this.form?.form.valid) {
-      const {firstName,lastName,email,job,grade,enabled}=this.form?.form.value
+      const {firstName,lastName,email,job,grade,enabled
+      ,birthdate,gender,phone
+      }=this.form?.form.value
       const user={
         firstName,
         lastName,
         email,
-        enabled
+        enabled,
+
       }
+      const year = birthdate.getFullYear();
+      const month = String(birthdate.getMonth() + 1).padStart(2, '0'); // Month is zero-based, so add 1
+      const day = String(birthdate.getDate()).padStart(2, '0');
+
+      const dateString = `${year}-${month}-${day}`;
       this.userService.add({
         ...user,
         "emailVerified": false  ,
@@ -68,7 +77,10 @@ export class AddUserComponent implements OnInit{
         ],
         attributes:{
           job,
-          grade
+          grade,
+          birthdate:dateString,
+          gender,
+          phone
         }
       }).pipe(
         tap((skill) => {

@@ -41,10 +41,20 @@ export class SkillService {
     return this.http.get<Page<Skill>>(this.baseUrl, {params: {page: page.toString(), size: size.toString()}});
   }
 
-  searchSkills(name: string, page: number, size: number): Observable<Page<Skill>> {
+  searchSkills(name: string|null,activity:string|null,domain:string|null, page: number, size: number): Observable<Page<Skill>> {
+    let queryParams={}
+     if(name){
+        queryParams={...queryParams,name:name}
+     }
+    if(activity){
+      queryParams={...queryParams,activity:activity}
+    }
+    if(domain){
+      queryParams={...queryParams,domain:domain}
+    }
     return this.http.get<Page<Skill>>(`${this.baseUrl}/search`, {
       params: {
-        name: name,
+        ...queryParams,
         page: page.toString(),
         size: size.toString()
       }

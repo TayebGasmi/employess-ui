@@ -34,9 +34,6 @@ export class ActivityListComponent {
     {
       dataKey: 'name',
     },
-    {
-      dataKey: 'description',
-    },
   ];
   pagination$: BehaviorSubject<Pagination> = new BehaviorSubject<Pagination>({rows: 10, page: 0});
   name = new FormControl('');

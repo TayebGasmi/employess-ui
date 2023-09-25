@@ -31,9 +31,6 @@ export class JobListComponent {
     {
       dataKey: 'name',
     },
-    {
-      dataKey: 'description',
-    },
   ];
   pagination$: BehaviorSubject<Pagination> = new BehaviorSubject<Pagination>({rows: 10, page: 0});
   name = new FormControl('');
@@ -63,7 +60,7 @@ export class JobListComponent {
     {field: 'description', header: 'Description'},
   ];
 
-  constructor(private notificationService: NotificationService, private service: JobService, private confirmationService: ConfirmationService,public activityService: JobService) {
+  constructor(private notificationService: NotificationService, private service: JobService, private confirmationService: ConfirmationService,public jobService: JobService) {
 
   }
 
@@ -78,7 +75,9 @@ export class JobListComponent {
   }
 
   deleteAll() {
+    console.log(this.table.selectedRow);
     this.service.deleteAll(this.table.selectedRow).subscribe(value => {
+
       this.notificationService.showInfo("Deleted successfully", "Delete")
       this.service.updateData()
     });

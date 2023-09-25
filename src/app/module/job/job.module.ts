@@ -11,11 +11,13 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {RippleModule} from "primeng/ripple";
 import {SharedModule} from "../shared/shared.module";
 import {ToolbarModule} from "primeng/toolbar";
+import { DeleteJobComponent } from './delete-job/delete-job.component';
 
 
 @NgModule({
   declarations: [
-    JobListComponent
+    JobListComponent,
+    DeleteJobComponent
   ],
   imports: [
     CommonModule,

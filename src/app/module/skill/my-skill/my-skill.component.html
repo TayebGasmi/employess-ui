@@ -4,12 +4,10 @@
       <p-toolbar styleClass="mb-4">
         <ng-template pTemplate="left">
           <div class="my-2">
-            <ng-container *ngIf="jobs$ |async as jobs">
-              <app-add-user [jobs]="jobs" ></app-add-user>
-            </ng-container>
-
+<!--            <ng-container *ngTemplateOutlet="deleteALL"></ng-container>-->
           </div>
         </ng-template>
+
         <ng-template pTemplate="right">
           <button (click)="exportExcel()" class="p-button-help" icon="pi pi-upload" label="Export" pButton
                   pRipple></button>
@@ -17,24 +15,19 @@
         </ng-template>
       </p-toolbar>
 
-      <ng-container *ngIf="users$ | async as users">
-        <app-table #table [cols]="cols" [dataSource]="users" [headers]="userHeaders"
-                     [title]="'Manage Users'">
-          <ng-template #search>
-          <span class="p-input-icon-left">
-    <i class="pi pi-search"></i>
-    <input [formControl]="name" class="w-full sm:w-auto" pInputText placeholder="Search..." type="text"/>
-</span>
-          </ng-template>
+      <ng-container *ngIf="skills$ | async as skills">
+        <app-table #table [cols]="cols" [dataSource]="skills.content" [headers]="skillHeaders"
+                   [title]="'Manage Skills'">
+
           <ng-template #actions let-rowData>
-            <ng-container *ngIf="jobs$ | async as jobs">
-              <app-update-user [jobs]="jobs" [user]="rowData"></app-update-user>
-            </ng-container>
-            <app-delete-user [id]="rowData.id"></app-delete-user>
+
           </ng-template>
         </app-table>
         <ng-container *ngIf="totalItems$ | async as totalItems">
           <div class="grid">
+            <div class="col-2 flex align-items-center justify-content-center ">
+              <span>{{ totalItems }} items total</span>
+            </div>
             <p-paginator (onPageChange)="onPageChange($event)"
                          *ngIf="pagination$ | async as pagination"
                          [first]="first"
@@ -49,4 +42,8 @@
     </div>
   </div>
 </div>
-
+<!--<ng-template #deleteALL>-->
+<!--  <p-confirmDialog [style]="{width: '50vw'} ">-->
+<!--  </p-confirmDialog>-->
+<!--  <button (click)="confirm()" class="p-button-danger" icon="pi pi-trash" label="Delete" pButton pRipple></button>-->
+<!--</ng-template>-->

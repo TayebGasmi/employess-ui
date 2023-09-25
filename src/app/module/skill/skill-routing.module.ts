@@ -8,6 +8,7 @@ import {QuizDetailsComponent} from "./quiz-details/quiz-details.component";
 import {ActivityListComponent} from "./activity-list/activity-list.component";
 import {DomainListComponent} from "./domain-list/domain-list.component";
 import {AuthGuard} from "../../guard/auth.guard";
+import {MySkillComponent} from "./my-skill/my-skill.component";
 
 const routes: Routes = [
 
@@ -46,6 +47,10 @@ const routes: Routes = [
       {
         path: 'domain',
         component: DomainListComponent
+      }
+      ,{
+      path: 'my',
+        component:MySkillComponent
       }
     ],
 

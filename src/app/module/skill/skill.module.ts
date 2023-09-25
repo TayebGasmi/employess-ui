@@ -37,6 +37,10 @@ import {DeleteDomainComponent} from './delete-domain/delete-domain.component';
 import { AddQuizComponent } from './add-quiz/add-quiz.component';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { AddSkillComponent } from './add-skill/add-skill.component';
+import { AssignSkillComponent } from './assign-skill/assign-skill.component';
+import { MySkillComponent } from './my-skill/my-skill.component';
+import { UpdateMySkillComponent } from './update-my-skill/update-my-skill.component';
+import { DeleteMySkillComponent } from './delete-my-skill/delete-my-skill.component';
 
 
 @NgModule({
@@ -59,7 +63,11 @@ import { AddSkillComponent } from './add-skill/add-skill.component';
     DeleteDomainComponent,
     AddQuizComponent,
     AddQuestionComponent,
-    AddSkillComponent
+    AddSkillComponent,
+    AssignSkillComponent,
+    MySkillComponent,
+    UpdateMySkillComponent,
+    DeleteMySkillComponent
   ],
   imports: [
     CommonModule,
