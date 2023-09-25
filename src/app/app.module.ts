@@ -35,7 +35,7 @@ import {GraphQLModule} from "./graphql.module";
     SharedModule,
     ToastModule,
     TaskModule,
-    GraphQLModule
+    GraphQLModule,
     TaskModule,
     KeycloakAngularModule,
     UsersModule,
