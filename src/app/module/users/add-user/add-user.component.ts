@@ -7,6 +7,7 @@ import {tap} from "rxjs";
 import {UserForm} from "../../../core/models/UserForm";
 import {FormField} from "../../../core/models/FormField";
 import {Validators} from "@angular/forms";
+import {Job} from "../../../core/models/job";
 
 @Component({
   selector: 'app-add-user',
@@ -33,7 +34,7 @@ export class AddUserComponent implements OnInit{
   @Input(
 
   )
-  jobs:any[]=[]
+  jobs:Job[]=[]
   fields:FormField[]=[]
   openModal() {
     this.showModal = true;

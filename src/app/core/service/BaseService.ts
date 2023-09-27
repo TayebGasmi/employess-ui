@@ -1,9 +1,19 @@
-import { HttpClient } from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {IBaseService} from "./IBaseService";
 import {BehaviorSubject, Observable} from "rxjs";
 import {Page} from "../models/Page";
 
-export class BaseService<T,I> implements IBaseService<T, I>{
+export class BaseService<T, I> implements IBaseService<T, I> {
+  getAll(): Observable<T[]> {
+    return this.httpClient.get<T[]>(`${this.url}/all`)
+  }
+  dataSubject$: BehaviorSubject<T | null> = new BehaviorSubject<T | null>(null);
+  data$: Observable<T | null> = this.dataSubject$.asObservable();
+
+  constructor(private httpClient: HttpClient, private url: string) {
+
+  }
+
   findByName(name: string, page: number, size: number): Observable<Page<T>> {
     return this.httpClient.get<Page<T>>(`${this.url}/search`, {
       params: {
@@ -12,19 +22,16 @@ export class BaseService<T,I> implements IBaseService<T, I>{
         size: size.toString()
       }
     });
+
   }
+
   updateById(t: T, id: I): Observable<T> {
     return this.httpClient.put<T>(`${this.url}/${id}`, t);
   }
-  updateData(t: T | null=null): void {
-    console.log("update")
+
+  updateData(t: T | null = null): void {
     this.dataSubject$.next(t);
   }
-  dataSubject$: BehaviorSubject<T|null>=new BehaviorSubject<T|null>(null);
-  data$: Observable<T|null>=this.dataSubject$.asObservable();
-    constructor(private httpClient: HttpClient, private url: string) {
-
-    }
 
   findById(id: I): Observable<T> {
     return this.httpClient.get<T>(`${this.url}/${id}`);
@@ -45,9 +52,6 @@ export class BaseService<T,I> implements IBaseService<T, I>{
   save(t: T): Observable<T> {
     return this.httpClient.post<T>(`${this.url}`, t);
   }
-
-
-
 
 
 }
