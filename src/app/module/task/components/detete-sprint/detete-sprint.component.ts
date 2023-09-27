@@ -13,7 +13,7 @@ export class DeteteSprintComponent {
   constructor(private confirmationService: ConfirmationService, private notificationService: NotificationService,private sprintService:SprintServiceService) {
   }
   @Input()
-  id='';
+  id:any;
   confirm() {
     this.confirmationService.confirm({
       message: 'Do you want to delete this record?',
