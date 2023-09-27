@@ -38,7 +38,7 @@
           </ng-container>
           <ng-container *ngIf="selectedSprint.value?.id" >
               <app-edit-sprint [sprint]="selectedSprint.value ?? undefined" ></app-edit-sprint>
-
+              <app-detete-sprint [id]="selectedSprint.value?.id ?? undefined"></app-detete-sprint>
           </ng-container>
 
         </div>
