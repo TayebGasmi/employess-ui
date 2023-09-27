@@ -15,34 +15,30 @@ import {TaskStatus} from "../../../../core/models/task-status.enum";
   templateUrl: './task-page.component.html',
   styleUrls: ['./task-page.component.scss']
 })
-export class TaskPageComponent implements OnInit{
+export class TaskPageComponent {
 
 
   protected readonly TaskStatus = TaskStatus;
 
 
 
-  allTask$:Observable<Task[]> = this.taskService.data$.pipe(switchMap(data=>this.taskService.getAllUndeletedTasks())) ;
+  allTask$:Observable<Task[]> =this.taskService.data$.pipe(
+    switchMap(_=> this.taskService.getAllUndeletedTasks() )
+  )
      draggedTask : Task | null | undefined;
      allSprints$:Observable<Sprint[]> = this.sprintService.getAllUndeletedSprints()
      selectedSprint:FormControl<Sprint | null >= new FormControl(null,Validators.required);
      selectedSprint$ = this.selectedSprint.valueChanges.pipe(
-       startWith(null),
        debounceTime(300),
     distinctUntilChanged(),
      );
-     /*sprintTasks$=this.selectedSprint$.pipe(
-       filter(sprint=> sprint!=""),
-       switchMap((sprint)=>this.taskService.selectTasksPerSprint(sprint||""||null))
-       )*/
+
 
   constructor(private taskService :TaskService,private sprintService:SprintServiceService,private notificationService:NotificationService) {
 
   }
 
-  ngOnInit() {
 
-  }
 
 
   dragStart(task: Task) {
@@ -59,6 +55,7 @@ export class TaskPageComponent implements OnInit{
      // @ts-ignore
      this.taskService.affectTaskToSprint(this.draggedTask.id,this.selectedSprint.value?.id).pipe(
        tap(task=>{
+         this.taskService.updateData()
          this.notificationService.showSuccess('Task '+this.draggedTask?.taskTitle+' affected to Sprint '+this.selectedSprint.value?.sprintTitle,'success');
       })
      ).subscribe();
@@ -66,31 +63,47 @@ export class TaskPageComponent implements OnInit{
 
     }
   }
-  sprintTask$:Observable<Task[]>=this.selectedSprint$.pipe(
-    switchMap(sprint=>this.taskService.selectTasksPerSprint(sprint?.id || "ff"))
+  data$:Observable<{ todo:Task[]
+  ,done:Task[],
+    test:Task[],
+    review:Task[],
+    inProgress:Task[],
+    waiting:Task[],
+
+  }>=combineLatest(
+    [this.selectedSprint$,this.taskService.data$]
+  ).pipe(
+    tap(([sprint,_])=> {
+      console.log("sprint")
+      console.log(sprint)
+    }),
+    switchMap(([sprint,_])=> {
+      return  this.taskService.data$.pipe(
+        switchMap(
+          _=>this.taskService.selectTasksPerSprint(sprint?.id || "ff")
+        ),
+        map(tasks=>(
+          {
+           todo:tasks.filter(task=>task.taskStatus==TaskStatus.TODO),
+            done:tasks.filter(task=>task.taskStatus==TaskStatus.DONE),
+            review:tasks.filter(task=>task.taskStatus==TaskStatus.UNDER_REVIEW),
+            test:tasks.filter(task=>task.taskStatus==TaskStatus.TEST),
+            inProgress:tasks.filter(task=>task.taskStatus==TaskStatus.IN_PROGRESS),
+            waiting:tasks.filter(task=>task.taskStatus==TaskStatus.WAITING),
+
+
+          }
+        ))
+      )
+    })
+    ,tap(task=> {
+      console.log("tasks")
+      console.log(task)
+    })
+
   )
-  data$:Observable<Task[]> = combineLatest([this.taskService.data$ , this.sprintTask$]).pipe(map(
-    ([_,tasks])=> tasks
-  ))
-  dropInsideSprint(status:TaskStatus){
- if(this.draggedTask !== null &&  this.draggedTask !== undefined ){
-   if(this.selectedSprint.valid){
-     // @ts-ignore
-     this.taskService.updateTaskStatus(this.selectedSprint.value?.id,status).subscribe( task =>{
-       this.taskService.updateData();
-     })
-   }
- }
-  }
-
-  updateSprintTasks(){
-    if(this.selectedSprint !== null && this.selectedSprint.valid && this.selectedSprint !== undefined ){
 
 
-
-
-    }
-  }
 
 
 }

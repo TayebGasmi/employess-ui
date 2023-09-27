@@ -25,8 +25,8 @@ export class SprintServiceService  extends BaseService<Sprint, string>{
         return this.http.post<Sprint>(`${API_URL}`, sprint);
     }
 
-    deleteSprint(sprintId: string) {
-        return this.http.put<Sprint>(`${API_URL}/delete/${sprintId}`, '').subscribe();
+    deleteSprint(sprintId: string):Observable<Sprint> {
+        return this.http.put<Sprint>(`${API_URL}/delete/${sprintId}`, '');
     }
     ///update/{sprintId}
     updateSprint(sprint:Sprint,sprintId:any):Observable<Sprint>{

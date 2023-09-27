@@ -23,6 +23,9 @@ import {MenuModule} from "primeng/menu";
 import {ChartModule} from "primeng/chart";
 import { TaskPieChartComponent } from './components/task-pie-chart/task-pie-chart.component';
 import { StackedBarChartComponent } from './components/stacked-bar-chart/stacked-bar-chart.component';
+import { DeteteTaskComponent } from './components/detete-task/detete-task.component';
+import { DeteteSprintComponent } from './components/detete-sprint/detete-sprint.component';
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 
 @NgModule({
@@ -35,7 +38,9 @@ import { StackedBarChartComponent } from './components/stacked-bar-chart/stacked
     EditSprintComponent,
     TaskDashboardPageComponent,
     TaskPieChartComponent,
-    StackedBarChartComponent
+    StackedBarChartComponent,
+    DeteteTaskComponent,
+    DeteteSprintComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +58,8 @@ import { StackedBarChartComponent } from './components/stacked-bar-chart/stacked
     FormsModule,
     SkillModule,
     MenuModule,
-    ChartModule
+    ChartModule,
+    ConfirmDialogModule
   ]
 })
 export class TaskModule {

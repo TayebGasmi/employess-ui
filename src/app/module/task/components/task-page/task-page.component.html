@@ -12,9 +12,9 @@
       </p-toolbar>
 
       <div *ngFor="let task of tasksList" class="overflow-auto" pDraggable="tasks" (onDragStart)="dragStart(task)" (onDragEnd)="dragEnd()">
-        <app-task-card
+        <app-task-card class="m-2"
         [task]="task"
-        (taskEditEventEmitter)="updateSprintTasks()">
+        >
 
         </app-task-card>
       </div>
@@ -30,14 +30,14 @@
           <app-add-sprint></app-add-sprint>
           <ng-container *ngIf="allSprints$ | async as allSprints"  >
 
-              <p-dropdown   [options]="allSprints" [formControl]="selectedSprint" optionLabel="sprintTitle" placeholder="Select a Sprint" ></p-dropdown>
+              <p-dropdown   [options]="allSprints" [formControl]="selectedSprint" optionLabel="sprintTitle" placeholder="Select a Sprint"   ></p-dropdown>
 
 
 
 
           </ng-container>
           <ng-container *ngIf="selectedSprint.value?.id" >
-              <app-edit-sprint></app-edit-sprint>
+              <app-edit-sprint [sprint]="selectedSprint.value ?? undefined" ></app-edit-sprint>
 
           </ng-container>
 
@@ -51,86 +51,80 @@
       <ng-container *ngIf="data$ | async as tasks" >
 
 
+        <div class="col  " >
 
-      <div class="col  " >
+          <h3>To do </h3>
 
-        <h3>To do </h3>
-
-                    <div *ngFor="let task of tasks">
-                      <ng-container *ngIf="task.taskStatus === TaskStatus.TODO">
-                        <app-task-card
-                          [task]="task"
-                          (taskEditEventEmitter)="updateSprintTasks()">
-
-                        </app-task-card>
-                      </ng-container>
-
-                    </div>
-
-
-      </div>
-      <div class="col border-round "  >
-        <h3 >In Progress</h3>
-
-          <div *ngFor="let task of tasks">
-            <ng-container *ngIf="task.taskStatus === TaskStatus.IN_PROGRESS">
-              <app-task-card
+          <div >
+            <ng-container *ngFor="let task of tasks.todo">
+              <app-task-card class="m-2"
                 [task]="task"
-                (taskEditEventEmitter)="updateSprintTasks()">
+              >
 
               </app-task-card>
             </ng-container>
 
           </div>
 
-      </div>
-      <div class="col ">
-        <h3 >Review</h3>
 
-          <div *ngFor="let task of tasks">
-            <ng-container *ngIf="task.taskStatus === TaskStatus.UNDER_REVIEW">
-              <app-task-card
+        </div>
+        <div class="col border-round "  >
+          <h3 >In Progress</h3>
+
+              <ng-container *ngFor="let task of tasks.inProgress">
+              <app-task-card class="m-2"
                 [task]="task"
-                (taskEditEventEmitter)="updateSprintTasks()">
+              >
+
+              </app-task-card>
+            </ng-container>
+
+
+        </div>
+        <div class="col ">
+          <h3 >Review</h3>
+
+            <ng-container *ngFor="let task of tasks.review">
+              <app-task-card class="m-2"
+                [task]="task"
+              >
 
               </app-task-card>
             </ng-container>
 
           </div>
 
-      </div>
-      <div class="col ">
-        <h3 >Test</h3>
+        <div class="col ">
+          <h3 >Test</h3>
 
-          <div *ngFor="let task of tasks">
-            <ng-container *ngIf="task.taskStatus === TaskStatus.TEST">
-              <app-task-card
+            <ng-container *ngFor="let task of tasks.test">
+              <app-task-card class="m-2"
                 [task]="task"
-                (taskEditEventEmitter)="updateSprintTasks()">
+              >
 
               </app-task-card>
             </ng-container>
 
           </div>
 
-      </div>
-      <div class="col">
-        <h3>Done</h3>
+        <div class="col">
+          <h3>Done</h3>
 
-          <div *ngFor="let task of tasks">
-            <ng-container *ngIf="task.taskStatus === TaskStatus.DONE">
-              <app-task-card
+            <ng-container *ngFor="let task of tasks.done">
+              <app-task-card class="m-2"
                 [task]="task"
-                (taskEditEventEmitter)="updateSprintTasks()">
+              >
 
               </app-task-card>
             </ng-container>
 
           </div>
-
-      </div>
 
       </ng-container>
+
+
+
+
     </div>
   </div>
 </div>

@@ -37,6 +37,7 @@ export class AddSprintComponent {
       this.sprintService.saveSprint(this.form?.form.value).pipe(
         tap((skill) => {
             this.notificationService.showSuccess('Sprint added successfully', 'Success');
+            this.sprintService.updateData();
             this.closeModal();
 
           }

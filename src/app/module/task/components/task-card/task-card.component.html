@@ -1,17 +1,17 @@
 <div class="product-item" pDraggable="products" >
   <div class="product-list-detail">
-    <h5 class="mb-2">{{task?.taskTitle}}</h5>
+    <h5 class="mb-2">{{task.taskTitle}}</h5>
     <i class="pi pi-tag product-category-icon "></i>
-    <span class="product-category pr-1">{{task?.taskEstimation}}</span>
+    <span class="product-category pr-1">{{task.taskEstimation}}</span>
     <i class="pi pi-clock product-category-icon pl-1" ></i>
-    <span class="product-category ">{{task?.taskTime}}</span>
+    <span class="product-category ">{{task.taskTime}}</span>
   </div>
   <div class="product-list-action">
     <div class="flex flex-row flex-wrap card-container blue-container">
       <!--<app-delete-domain></app-delete-domain>-->
-      <i class="pi pi-trash product-category-icon pl-1" (click)="deleteTask(task.id)" ></i>
+      <app-detete-task [id]="task.id"></app-detete-task>
     <app-edit-task  [task]="task"
-                     (editTaskEventEmitter)="emitToTaskPage($event)"> </app-edit-task>
+                    > </app-edit-task>
       <i class="pi pi-copy product-category-icon pl-1" (click)="duplicateTask(task.id)" ></i>
     </div>
     <p-tag [value]="task.taskStatus" severity="info" class="p-1"></p-tag>

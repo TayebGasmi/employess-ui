@@ -3,6 +3,7 @@ import {Task} from "../../../../core/models/Task";
 import {TaskService} from "../../../../core/service/TaskService";
 import {tap} from "rxjs";
 import {NotificationService} from "../../../shared/notification.service";
+import {ConfirmationService, ConfirmEventType} from "primeng/api";
 
 @Component({
   selector: 'app-task-card',
@@ -11,12 +12,8 @@ import {NotificationService} from "../../../shared/notification.service";
 })
 export class TaskCardComponent {
   @Input() task!:Task;
-  @Output() taskEditEventEmitter:EventEmitter<Task> = new EventEmitter<Task>()
-  emitToTaskPage(task:Task){
-    console.log('gogogog')
-this.taskEditEventEmitter.emit(task)
-  }
-  constructor(private taskService:TaskService,private notificationService:NotificationService) {
+
+  constructor(private taskService:TaskService,private notificationService:NotificationService ) {
 
   }
   deleteTask(id:string){
@@ -33,8 +30,11 @@ this.taskEditEventEmitter.emit(task)
     this.taskService.duplicateTask(id).pipe(
       tap((task:Task)=>{
       this.notificationService.showSuccess('Task Duplicated successfully', 'Success');
-    }))
+        this.taskService.updateData();
+
+      }))
 
       .subscribe();
 }
+
 }
