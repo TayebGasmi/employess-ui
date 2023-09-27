@@ -41,6 +41,9 @@ import { AssignSkillComponent } from './assign-skill/assign-skill.component';
 import { MySkillComponent } from './my-skill/my-skill.component';
 import { UpdateMySkillComponent } from './update-my-skill/update-my-skill.component';
 import { DeleteMySkillComponent } from './delete-my-skill/delete-my-skill.component';
+import { SkillDashComponent } from './skill-dash/skill-dash.component';
+import { SkillBarChartComponent } from './skill-bar-chart/skill-bar-chart.component';
+import {ChartModule} from "primeng/chart";
 
 
 @NgModule({
@@ -67,7 +70,9 @@ import { DeleteMySkillComponent } from './delete-my-skill/delete-my-skill.compon
     AssignSkillComponent,
     MySkillComponent,
     UpdateMySkillComponent,
-    DeleteMySkillComponent
+    DeleteMySkillComponent,
+    SkillDashComponent,
+    SkillBarChartComponent
   ],
   imports: [
     CommonModule,
@@ -79,7 +84,7 @@ import { DeleteMySkillComponent } from './delete-my-skill/delete-my-skill.compon
     RippleModule,
     DialogModule,
     ConfirmDialogModule,
-    InputTextModule, ReactiveFormsModule, CardModule, DividerModule, CheckboxModule, InputTextareaModule, MenuModule, ToggleButtonModule, FileUploadModule
+    InputTextModule, ReactiveFormsModule, CardModule, DividerModule, CheckboxModule, InputTextareaModule, MenuModule, ToggleButtonModule, FileUploadModule, ChartModule
   ]
 })
 export class SkillModule {

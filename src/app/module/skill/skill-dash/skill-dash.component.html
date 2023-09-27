@@ -1,0 +1,35 @@
+<ng-container *ngIf="data$ | async as data">
+  <div class="grid">
+    <div class="col-2 lg:col-2 xl:col-2">
+      <div class="card mb-0">
+        <div class="flex justify-content-between mb-3">
+          <div>
+            <span class="block text-500 font-medium mb-3">Total Users</span>
+
+              <div class="text-900 font-medium text-xl">{{data.length }}</div>
+
+          </div>
+          <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+            <i  class="pi pi-user" style="font-size: 2.5rem"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2 lg:col-2 xl:col-2">
+      <div class="card mb-0">
+        <div class="flex justify-content-between mb-3">
+          <div>
+            <span class="block text-500 font-medium mb-3">Most Skilled User</span>
+
+            <div class="text-900 font-medium text-xl">{{data.length }}</div>
+
+          </div>
+          <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+            <i class="pi pi-list text-blue-500 text-xl"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<app-skill-bar-chart [data]="data"></app-skill-bar-chart>
+</ng-container>
