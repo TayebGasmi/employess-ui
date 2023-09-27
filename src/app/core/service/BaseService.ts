@@ -17,6 +17,7 @@ export class BaseService<T,I> implements IBaseService<T, I>{
     return this.httpClient.put<T>(`${this.url}/${id}`, t);
   }
   updateData(t: T | null=null): void {
+    console.log("update")
     this.dataSubject$.next(t);
   }
   dataSubject$: BehaviorSubject<T|null>=new BehaviorSubject<T|null>(null);

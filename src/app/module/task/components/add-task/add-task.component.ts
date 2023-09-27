@@ -44,6 +44,7 @@ export class AddTaskComponent {
         tap((task) => {
             this.notificationService.showSuccess('Task added successfully', 'Success');
             this.closeModal();
+            this.taskService.updateData();
 
           }
         )

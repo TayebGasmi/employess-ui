@@ -1,4 +1,4 @@
-<i class="pi pi-pencil product-category-icon pl-1" (click)="openModel()" ></i>
+<button  pButton pRipple label="Edit" icon="pi pi-pencil" class="p-button-text" (click)="openModel()" ></button>
 <p-dialog  [(visible)]="showModal" [style]="{ width: '50vw' }" [header]="'Edit Task'" [modal]="true" class="p-fluid">
   <app-form [fields]="sprintForm" [formData]="sprint">
   </app-form>

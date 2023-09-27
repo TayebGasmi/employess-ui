@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 
 import {FormComponent} from "../../../shared/form/form.component";
 import {NotificationService} from "../../../shared/notification.service";
@@ -12,7 +12,7 @@ import {SprintForm} from "../../../../core/models/SprintForm";
   templateUrl: './edit-sprint.component.html',
   styleUrls: ['./edit-sprint.component.scss']
 })
-export class EditSprintComponent {
+export class EditSprintComponent implements OnInit{
   @Input()
   sprint?: Sprint;
 
@@ -43,5 +43,9 @@ export class EditSprintComponent {
   }
   openModel() {
     this.showModal = true;
+  }
+
+  ngOnInit(): void {
+    console.log(this.sprint);
   }
 }
